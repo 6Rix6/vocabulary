@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+  <html lang="ja">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="icon" href="img/icon.webp">
+      <link rel="stylesheet" href="./mdstyle.css" />
+      <title>ターゲット</title>
+    </head>
+
+      
+    <body>
+        <div id="splash">
+        <div id="splash-logo"></div>
+        <!--/splash--></div>
+        <div class="splashbg"></div><!---画面遷移用-->
+
+
+        <div id="container">
+        <header>
+            <h1 class="headline">
+                <a>ModelSentence</a>
+            </h1>
+
+
+            
+    <!--<a href = "../index.html">戻る</a>-->
+        <!----------------範囲入力欄--------------------->
+      <div class="range">
+          <label class = "ef">範囲：
+            <input class="min" type="number" id="min" min = "1" max = "500">
+          </label>
+          <label class="ef" for="name">〜
+            <input class="max" type="number" id="max" min = "1" max = "500">
+          </label>
+          <!--<input class = "submit" type = "button" value = "決定">-->
+          <a href="#" class="btn03 pushright"><span>決定</span></a>
+      </div>
+
+            </header>
+
+        <!----------------メイン部分----------------------->
+      <div class="form">
+          
+            <font size="5"><p class = "msg" id="msg"></p></font>
+
+            <font size="5"><p class = "choice" id="choice"></p></font>
+          
+            <font size="5"><p class = "ans" id="ans"></p></font>
+          
+            <div class = "a"><a class = "b">100</a><a>/</a><a class = "c">500</a></div>
+          
+            <div class = "input">
+                <label class="ef">
+                    <input class="nameText" type="text" id="nameText">
+                </label>
+            </div>
+          
+            <a href="#" class="btn04 pushright"><span>answer</span></a>
+          <a href="#" class="btn06 pushright"><span>金内亮に質問する</span></a>
+          
+       </div>
+
+            <!-------------------埋め込みAI----------------------->
+
+            <div id="chatbot-toggle_button">
+                <a id="chat-button" href="#">
+                    <img src="img/chaticon.png" width="100" height="100">
+                </a>
+            </div>
+            
+        <!---------------------ポップアップ---------------------->
+        <div class = "popup-main">
+        <input type = "checkbox" id = "popup"> <!--ここのチェックをつけたり外したりすればいいらしい-->
+        <label class = "popup-open" for = "popup"></label> <!--この中身でポップアップ出す表示、デバッグ用-->
+        <div class = "popup-overlay">
+            <div class = "popup-window">
+                <section class = "popup-text">
+                    <font size="7"><p class = "cerebrate"></p></font>
+                    <p class = "missedword"></p>
+                    <table class = "resultTable" id="resultTable"></table>
+                    <div class="retry">
+                    <a href="#" class="btn05 pushright"><span>もう一度</span></a>
+                    </div>
+                </section>
+                <label class="popup-close" for="popup">
+                    <!-- <svg width = "18" height = "18" xmlns="https://www.w3.org/2000/svg">
+                        <line x1="0" y1="0" x2="18" y2="18" stroke="white" stroke-width="3"></line>
+                        <line x1="0" y1="18" x2="18" y2="0" stroke="white" stroke-width="3"></line>
+                    </svg> -->
+                 </label>
+            </div>
+        </div>
+        </div>
+
+        <style>
+        table, td, th {
+            border-collapse: collapse;
+            border:1px solid #333;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top : 20px;
+        }
+        td{
+            padding: 5px;
+        }
+        td.THUMBNAIL img{
+            width: 100px;
+        }
+        </style>
+<!------------------------ワードリスト------------------------------->
+<div class="wordlist" 
+data-word="1@formerly most Japanese houses were made of wood@昔はほとんどの日本の家は木造でした
+2@you look pale. what is the matter with you ?@顔色が良くないですね。どうしたのですか。
+301@the parking lot was empty except for that huge truck@駐車場はその巨大なトラックのほかは一台も車はなかった
+302@to the best of my knowledge ,he thinks of everything in terms of money@ぼくの知る限りでは、彼は何でも金銭に結びつけて考える
+303@let me say a few words by way of suggestion@提案として一言二言言わせてください
+304@he took every possible step to get on in life at the cost of his health@彼は出世するために、健康を害してまでもありとあらゆる手段を取った
+305@the ship was at the mercy of a mountain of a wave and the crew were face to face with death@船は山のような波のなすがままになり、乗組員たちは死に直面していた
+306@i hope mother is in a good ,or she will be angry with me for coming home late@お母さんの機嫌が良ければいいのだが。でないと遅く帰ったことで私を怒るだろう
+307@she has no eye for jewels ;she can't tell the real from the false@彼女は宝石を見る目がない。本物と偽物の区別がつかないのだ
+308@Between ourselves ,sam wants to be independent of his father@ここだけの話だが、サムは父親から独立したがっているんだ
+309@with all his wealth ,he was far from being happy@そんなに財産がありながら、彼は決して幸福ではなかった
+310@what a pity that he ,of all men ,should fall a victim to a fatal disease!@よりによって彼が不治の病にかかるとは何という残念なことだ
+311@those who visit niagara falls are sure to be surprised at their magnitude@ナイアガラの滝をおとずれる人たちは必ずその壮大さに驚く
+312@he mentioned the book whose title has slipped my memory@私がその題名を失念してしまった本のことを彼は話に出した
+313@'botchan' is based on the experiences which the author had while teaching in a certain middle school in shikoku@「坊っちゃん」は作者が四国のある中学で教師をしていた頃の経験に基づいている
+314@soseki natume is an author who i greatly admire . he is one of the greatest writers that japan has ever produced@夏目漱石は私の大いに崇拝する作家です。彼は日本が生んだ最も偉大な作家の一人です
+315@who that has pride can stand such an insult ?@誇りを持った人間なら誰がそのような侮辱に耐えられようか
+316@she is not the woman that she used to be@彼女は昔の彼女ではない
+317@i was annoyed at the abrupt way in which she left us@彼女がだしぬけに立ち去ったのに私は腹を立てた
+318@what struck me particularly was the ease with witch he got through the work@特に感銘の深かったのは彼がその仕事をいかにもやすやすとやってのけたことであった
+319@there was nothing he liked better than reading and traveling ,which added a good deal to his stock of knowledge@読書と旅行ほど彼の好きなものはなかったがこれが彼の知識を大いに豊かにしたのであった
+320@in due course he graduated from the college with honors ,and what was better still ,he was offered the very job he had long wanted@やがて彼は大学を優等で卒業したがそれにも増していいことには、かねてから希望していた職についた
+321@his wife ,who is french ,can speak english better than he does@彼の奥さんはフランス人だが、彼より英語が上手だ
+322@the game ended in a victory for school'b' ,by a score of 5 to 2 ,which was quite a surprise to us@試合は５対２のスコアでB校の勝利に終わったが、番狂わせであった
+323@i saw among the crowd a man who i thought was your brother@ぼくは群衆の中に君の兄さんだと思う人を見かけました
+324@will you recommend a reference book i can read easily which is rich in contents ?@簡単に読めて内容が豊富な参考書を推薦してくれませんか
+325@even as a child he would often amaze grown-up people with his unusual ability. he seems to have been what you call an infant genius@彼は子供の頃でも、その非凡な才能によって大人たちをしばしば驚かせた。いわゆる神童であったらしい
+326@reading is to the mind what food is to the body@読書と精神の関係は、食物と肉体の関係と同じである
+327@read such books as make you the wiser for reading them@読んだらそれだけ賢くなるような本を読みなさい
+328@you are going through the same trial as i did years ago@君たちは今、私が何年も前に経験したのと同じ訓練を経験しているのだ
+329@as is often the case ,the streetcar i took this morning was awfully crowded@いつものことだが、今朝の電車は恐ろしく混んでいた
+330@there is no rule but has some exceptions@例外のない規則はない
+331@the doctor told him to take a few days' rest ,which he followed@医者は彼に二、三日休養を取るように言った。そして彼はその忠告に従った
+332@he used what little money he had saved to tide over the crisis@彼はその危機を乗り切るために、貯えていたわずかな金を全部使った
+333@the time will soon come when we can enjoy space travel@宇宙旅行を楽しむことのできる時がやがて来るでしょう
+334@there are some cases  where  honesty does not pay@正直者がばかをみることもある
+335@the only reason that i paint is that i can't help it@私が絵を描く唯一の理由は、描かずにはいられないからです
+336@she was just going to tell me more ,when her father charged into the apartment ,scarlet with anger@彼女が私にもっと話そうとしたちょうどその時、彼女の父が真っ赤になって怒りながらその部屋に飛び込んできた
+337@finally he went to boston ,where he settled down for the rest of his life@最後に彼はボストンに行き、そこに定住して余生を送った
+338@i'd like to have completed my graduation thesis somehow by the time the vacation comes to an end@休暇が終わるまでに、なんとか卒論を仕上げてしまいたい
+339@the fates seldom give us what we want in the way we want it@運命の女神が、我々の望むものを、望ましいと思う仕方で与えてくれる事はまずない
+340@he is masculine and very considerate . that's why i like him@あの人は男らしくてとても思いやりがあるのです。それで私はあの人が好きなのです
+341@he would not listen to whoever opposed him@彼は誰でも自分に反対する人に耳を貸そうとしなかった
+342@whichever of you comes in first will receive the prize@君たちのうちどちらでも最初にゴールインしたものが賞をもらうことになる
+343@he succeeds in whatever he undertakes ;for he is not only industrious but also careful@彼は何を企てても成功する。というのも勤勉であるばかりでなく注意深いからである
+344@you may use this money for whatever purpose you choose@君は何でも好きな目的にこの金を使って良い
+345@you can come whenever it is convenient to you@いつでも都合の良い時に来ていいよ
+346@whomever she spoke to ,she was invariably polite@彼女は誰と話しても、いつも礼儀正しかった
+347@whichever way we may look ,we see nothing but mountains@どちらを見ても山ばかりだ
+348@whatever business you may be engaged in ,you cannot hope for success unless you apply yourself to it heart and soul@どんな職業に従事しても、一生懸命にそれをしなければ成功は望めません
+349@wherever we may go in the city ,we find large buildings under construction ,and the cars driving about have remarkably increased in number@その市ではいたるところで大きな建物が建設中ですし、走り回っている自動車の数もめっきり増えてきました
+350@however hard we tried ,we could not keep the fire from spreading@いくらやってみても、我々は火が広がるのを防ぐことはできなかった
+351@night had completely fallen before we were aware of it@いつの間にかすっかり夜になっていた
+352@as we drove on ,the sound of music died gradually away until we could no longer hear it@車を走らせてゆくにつれて、音楽は次第に音が小さくなってついにはもはや聞こえなくなった。
+353@people do not know the blessing of health till they lose it@人は健康を失って初めてそのありがたみが分かる
+354@the first time i saw him ,i did not think that there was in him anything out of the ordinary@はじめて彼にあった時、別に普通の人と変わっているところがあるとは思わなかった
+355@the child burst into tears the moment he saw his mother enter the room@子供は母親が部屋に入ってくるのを見た途端、わっと泣き出した
+356@immediately he put down the receiver with a sigh of relief ,the telephone rang again@彼がホッとして受話器をおいたら、すぐにまた電話がなった
+357@he had hardly taken a few bites when he complained of a stomachache@彼は二口か、三口食べるか食べないうちに、腹痛を訴えた
+358@no sooner had i entered the school gates than i heard the bell ringing . i ran into the classroom barely in time@校門に入るのと同時にベルが鳴っているのが聞こえた
+359@while hot ,iron can be beaten into almost any shape ,but once cooled down ,it becomes inflexible@暑い間は、鉄は叩いてほとんどどんな形にもすることができるが、いったん冷えてしまうと曲がらなくなる
+360@he makes a point of putting everything back where it was@彼は何でも、元あったところに返しておくことにしている。
+361@unless we develop other sources of energy ,our entire way of life will change to a shocking extent@他のエネルギー源を開発しなければ、我々の全生活様式はひどく変化するであろう
+362@in case he arrives before i get back  ,never fail to contact me@私が帰ってくるまでに彼が到着した場合には、必ず私に連絡してくれ
+363@as long as i live ,i shall never forget the deep emotion i felt that day@僕はあの日の感激を生涯忘れないでしょう
+364@so far as i am concerned ,i have no objection to explaining the plan in detail@私に関する限り、その計画を詳しく説明するのに異議はありません
+365@not a day passes but traffic accidents are reported@一日として交通事故が報道されない日はない"
+hidden></div>
+<!----------------------ここまでワードリスト-------------------------------->
+            </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="./mdapp.js"></script>
+    </body>
+  </html>
