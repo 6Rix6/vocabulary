@@ -60,7 +60,7 @@ const app = () => {
 
     //-----------------------
 
-    //単語はresult[番号][1],日本語はresult[番号][2]で取得
+    //n番目の単語はresult[n][単語],日本語はresult[n][意味]で取得
 
     nameText.addEventListener('input', butotnClick);
     //ワードリストを配列に代入
