@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if(!localStorage.hasOwnProperty("mdmax_strage")){
         localStorage.setItem('mdmax_strage',500);
         localStorage.setItem('mdmin_strage',1);
-    };
+    };//ローカルストレージ存在確認
     max.value = localStorage.getItem('mdmax_strage');
     min.value = localStorage.getItem('mdmin_strage');
     choicelist.hidden = true;
