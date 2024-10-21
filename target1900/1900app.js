@@ -84,8 +84,8 @@ const app = () => {
 
     //最大値、最小値の取得 初期化も兼ねてる
     const getrange = () =>{
-        localStorage.setItem('max_strage', max.value);
-        localStorage.setItem('min_strage', min.value);
+        localStorage.setItem('1900max_strage', max.value);
+        localStorage.setItem('1900min_strage', min.value);
         maxnumber = max.value - 1;
         minnumber = min.value - 1;
         currentnumbers = 0;
@@ -277,12 +277,12 @@ const app = () => {
 
     
     window.addEventListener('DOMContentLoaded', () => {
-        if(!localStorage.hasOwnProperty("max_strage")){
-            localStorage.setItem('max_strage',1900);
-            localStorage.setItem('min_strage',1);
+        if(!localStorage.hasOwnProperty("1900max_strage")){
+            localStorage.setItem('1900max_strage',1900);
+            localStorage.setItem('1900min_strage',1);
         };
-        max.value = localStorage.getItem('max_strage');
-        min.value = localStorage.getItem('min_strage');
+        max.value = localStorage.getItem('1900max_strage');
+        min.value = localStorage.getItem('1900min_strage');
         choices_area.hidden = true;
         nameText.hidden = false;
         getrange();
