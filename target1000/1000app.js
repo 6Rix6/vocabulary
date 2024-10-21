@@ -277,7 +277,7 @@ const app = () => {
 
     
     window.addEventListener('DOMContentLoaded', () => {
-        if(!localStorage.hasOwnProperty("key")){
+        if(!localStorage.hasOwnProperty("max_strage")){
             localStorage.setItem('max_strage',1000);
             localStorage.setItem('min_strage',1);
         };
