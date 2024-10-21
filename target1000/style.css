@@ -4,6 +4,132 @@ body {
     font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
 }
 
+/*************************画面遷移用******************/
+
+
+
+/*========= ローディング画面のためのCSS ===============*/
+#splash {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #333;
+	z-index: 9999999;
+	text-align:center;
+	color:#fff;
+}
+
+#splash-logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/*========= 画面遷移のためのCSS ===============*/
+
+/*画面遷移アニメーション*/
+.splashbg{
+    display: none;
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear .splashbg{
+    display: block;
+    content: "";
+    position:fixed;
+	z-index: 999;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+	left: 0;
+    transform: scaleX(0);
+    background-color: #333;/*伸びる背景色の設定*/
+	animation-name:PageAnime;
+	animation-duration:1.2s;
+	animation-timing-function:ease-in-out;
+	animation-fill-mode:forwards;
+
+}
+
+@keyframes PageAnime{
+	0% {
+		transform-origin:right;
+		transform:scaleX(0);
+	}
+	50% {
+		transform-origin:right;
+		transform:scaleX(1);
+	}
+	50.001% {
+		transform-origin:left;
+	}
+	100% {
+		transform-origin:left;
+		transform:scaleX(0);
+	}
+}
+
+/*画面遷移の後現れるコンテンツ設定*/
+
+#container{
+	opacity: 0;/*はじめは透過0に*/
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear #container{
+	animation-name:PageAnimeAppear;
+	animation-duration:1s;
+	animation-delay: 0.8s;
+	animation-fill-mode:forwards;
+	opacity: 0;
+}
+
+@keyframes PageAnimeAppear{
+	0% {
+	opacity: 0;
+	}
+	100% {
+	opacity: 1;
+}
+}
+
+
+
+/****************************************************/
+
+
+header {
+  width: 100%;
+  padding: 15px 0;
+  margin: 0 auto;
+  text-align: center;
+    color:white;
+	background-color:#333;
+	border-bottom-right-radius: 7px;
+	border-bottom-left-radius: 7px;
+}
+header .headline{
+  font-size: 32px;
+}
+.nav-list {
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+.nav-list-item {
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.max,.min{
+	height:25px;
+	width:40px;
+	border-radius: 7px;
+	text-align: center;
+}
+
 .form{
     text-align: center;
 }
@@ -23,12 +149,48 @@ body {
 
 .ans{
 	margin-top: 5px;
-	margin-bottom: 50px;
+	margin-bottom: 5px;
 	font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
 	text-align: center;
 }
 
+.material-symbols-outlined{
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
 .input{
+  text-align: center;
+  position: relative;
+  width: 30%;
+  margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.ef{
+}
+
+.input input[type='text'] {
+    text-align: center;
+  font: 15px/1.6 sans-serif;
+  width: calc(100% - 20px);
+  padding: 0.3em;
+  color: #333;
+  border: 1px solid #bababa;
+  box-shadow: 1px 1px 2px 0 #333 inset;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.input .ef input[type='text']:focus {
+    text-align: center;
+  outline: none;
+  box-shadow: inset 1px 1px 2px 0 #333;
+}
+
+/* .input{
   text-align: center;
 }
 
@@ -44,7 +206,7 @@ body {
     z-index: 10;
     outline: 0;
 	border-radius: 7px;
-}
+} */
 
 .judge{
 }
@@ -68,7 +230,7 @@ body {
     text-align: center;
     background: transparent;
 	border-radius: 5px;
-	border: solid 1px #333;
+	border: solid 1px #000;
     outline: none;
     /*アニメーションの指定*/
     transition: all 0.1s ease;
@@ -88,7 +250,7 @@ body {
     padding: 3px 10px;
 	background:#fff;
 	border-radius: 5px;
-	color:#333;
+	color:#000;
     /*アニメーションの指定*/
     transition: all 0.3s ease;
 }
@@ -254,10 +416,21 @@ body {
     margin-left:50%;
 	margin-right:50%;
     transform: translate(-50%, -50%);
+    /* overflow: auto; */
 }
 
 .popup-text{
+    display:block;
     margin:0;
+    mtext-align: center;
+}
+
+.resultTable{
+    display:table;
+    max-height:450px;
+    border: solid 0px #333;
+    overflow: auto;
+    text-align: center;
 }
 
 .popup-text:not(:last-of-type){
@@ -271,217 +444,148 @@ body {
     right:0;
 }
 
-.ans1,.ans2,.ans3,.ans4{
-	margin-top: 30px;
-	cursor: pointer;
+
+tbody{
+    margin-left:auto;
+	margin-right:auto;
+    text-align: center;
 }
 
-
-/*========= ローディング画面のためのCSS ===============*/
-#splash {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: #333;
-	z-index: 9999999;
-	text-align:center;
-	color:#fff;
+thead{
+    margin-left:auto;
+	margin-right:auto;
+    text-align: center;
+    
 }
 
-#splash-logo {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.choices {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  /* max-width: 400px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-/*========= 画面遷移のためのCSS ===============*/
-
-/*画面遷移アニメーション*/
-.splashbg{
-    display: none;
+.choices li {
+  margin: 10px;
+  padding: 15px;
+  border: 2px solid #333333ba;
+  border-radius: 10px;
+    cursor: pointer;
 }
 
-/*bodyにappearクラスがついたら出現*/
-body.appear .splashbg{
-    display: block;
-    content: "";
-    position:fixed;
-	z-index: 999;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-	left: 0;
-    transform: scaleX(0);
-    background-color: #333;/*伸びる背景色の設定*/
-	animation-name:PageAnime;
-	animation-duration:1.2s;
-	animation-timing-function:ease-in-out;
-	animation-fill-mode:forwards;
-
+.choices li.hint {
+  border: 2px dashed #dfdfdf;
 }
 
-@keyframes PageAnime{
-	0% {
-		transform-origin:right;
-		transform:scaleX(0);
-	}
-	50% {
-		transform-origin:right;
-		transform:scaleX(1);
-	}
-	50.001% {
-		transform-origin:left;
-	}
-	100% {
-		transform-origin:left;
-		transform:scaleX(0);
-	}
+.choices li.active {
+  border: 2px dashed #333;
 }
 
-/*画面遷移の後現れるコンテンツ設定*/
-
-#container{
-	opacity: 0;/*はじめは透過0に*/
+.question{
+    display:ruby;
 }
 
-/*bodyにappearクラスがついたら出現*/
-body.appear #container{
-	animation-name:PageAnimeAppear;
-	animation-duration:1s;
-	animation-delay: 0.8s;
-	animation-fill-mode:forwards;
-	opacity: 0;
-}
-
-@keyframes PageAnimeAppear{
-	0% {
-	opacity: 0;
-	}
-	100% {
-	opacity: 1;
-}
-}
-
-
-.max,.min{
-	height:25px;
-	width:40px;
-	border-radius: 7px;
-	text-align: center;
-}
-
-
-header {
-  width: 100%;
-  padding: 15px 0;
-  margin: 0 auto;
-  text-align: center;
-    color:white;
-	background-color:#333;
-	border-bottom-right-radius: 7px;
-	border-bottom-left-radius: 7px;
-}
-header .headline{
-  font-size: 32px;
-}
-.nav-list {
-  text-align: center;
-  padding: 10px 0;
-  margin: 0 auto;
-}
-.nav-list-item {
-  list-style: none;
-  display: inline-block;
-  margin: 0 20px;
-}
-
-/*==================================================
-共通　横並びのための設定
-===================================*/
-
-.gnavi{
-    display: block;
-    flex-wrap: wrap;/*スマホ表示折り返し用なのでPCのみなら不要*/
-    margin:0 0 50px 0;
-    list-style: none;
-	margin-top:50px;
-	padding:10px 10px;
-}
-
-.gnavi li a{
-	margin:10px;
-    padding:10px 10px;
-    text-decoration: underline;
-    color: #333;
-}
-
-.gnavi li{
-    margin-bottom:40px;
-	display: inline;
-}
-
-/*背景の設定
-
-.gnavi li a{
-    /*背景色の基点とするためrelativeを指定
-	position: relative;
-    /*アニメーションの指定
-	transition: all .7s;
-}
-
-.gnavi li a::after {
-	content: '';
-    /*絶対配置で線の位置を決める
-	position: absolute;
-	z-index: -1;
-	bottom: 0;
-	left: 0;
-    /*背景の形状
-	width: 0;
-	height: 1px;
-	background:#0481A2;　/*出てくるカラー
-	opacity: 0;/*はじめは透過を0に
-}
-
-
-/*現在地とhoverの設定*
-.gnavi li.current a::after,
-.gnavi li a:hover::after {
-    /*背景の形状*
-	width: 100%;
-	opacity: 1;
-    /*アニメーションの指定*
-	animation:bgappear 0.5s forwards;
-}
-
-/*アニメーションで線を伸ばして背景をつける*
-@keyframes bgappear{
-  0% {
-    width: 0%;
-    height: 1px;
-  }
-  50% {
-    width: 100%;
-    height: 1px;
-  }
-  100% {
+.mode_swicher .checkbox {
+    display: table-cell;
     width: 100%;
     height: 100%;
-    background: #0481A2;/*出てくるカラー*
+    vertical-align: middle;
+    text-align: center;
   }
+
+  .mode_swicher label {
+    display: inline-block;
+    color: #333;
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  .mode_swicher label span {
+    display: inline-block;
+    position: relative;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    transform-origin: center;
+    border: 2px solid #333;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+  }
+  .mode_swicher label span:before {
+    content: "";
+    width: 0px;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    position: absolute;
+    transform: rotate(45deg);
+    top: 13px;
+    left: 9px;
+    transition: width 50ms ease 50ms;
+    transform-origin: 0% 0%;
+  }
+  .mode_swicher label span:after {
+    content: "";
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    position: absolute;
+    transform: rotate(305deg);
+    top: 16px;
+    left: 10px;
+    transition: width 50ms ease;
+    transform-origin: 0% 0%;
+  }
+  .mode_swicher label:hover span:before {
+    width: 5px;
+    transition: width 100ms ease;
+  }
+  .mode_swicher label:hover span:after {
+    width: 10px;
+    transition: width 150ms ease 100ms;
+  }
+
+  .mode_swicher input[type=checkbox] {
+    display: none;
+  }
+  .mode_swicher input[type=checkbox]:checked + label span {
+    background-color: #333;
+    transform: scale(1.25);
+  }
+  .mode_swicher input[type=checkbox]:checked + label span:after {
+    width: 10px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  .mode_swicher input[type=checkbox]:checked + label span:before {
+    width: 5px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  .mode_swicher input[type=checkbox]:checked + label:hover span {
+    background-color: #333;
+    transform: scale(1.25);
+  }
+  .mode_swicher input[type=checkbox]:checked + label:hover span:after {
+    width: 10px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  .mode_swicher input[type=checkbox]:checked + label:hover span:before {
+    width: 5px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+
+.buttons{
+    display: ruby;
 }
-
-/*現在地とhoverの設定*
-.gnavi li.current a,
-.gnavi li a:hover{
-  	color: #fff;
-    /*テキストを最前面へ*
-	z-index: 1;
-}
-
-
-*/
-
-/*こんにちは*/
-

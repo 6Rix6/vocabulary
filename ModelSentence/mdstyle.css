@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
 body {
   margin: 0;
-  font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
+  font-family: 'M PLUS Rounded 1c', "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
 }
 
 /*************************画面遷移用******************/
@@ -10,88 +11,94 @@ body {
 
 /*========= ローディング画面のためのCSS ===============*/
 #splash {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: #333;
-	z-index: 9999999;
-	text-align:center;
-	color:#fff;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  z-index: 9999999;
+  text-align: center;
+  color: #fff;
 }
 
 #splash-logo {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*========= 画面遷移のためのCSS ===============*/
 
 /*画面遷移アニメーション*/
-.splashbg{
-    display: none;
+.splashbg {
+  display: none;
 }
 
 /*bodyにappearクラスがついたら出現*/
-body.appear .splashbg{
-    display: block;
-    content: "";
-    position:fixed;
-	z-index: 999;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-	left: 0;
-    transform: scaleX(0);
-    background-color: #333;/*伸びる背景色の設定*/
-	animation-name:PageAnime;
-	animation-duration:1.2s;
-	animation-timing-function:ease-in-out;
-	animation-fill-mode:forwards;
+body.appear .splashbg {
+  display: block;
+  content: "";
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  background-color: #333;
+  /*伸びる背景色の設定*/
+  animation-name: PageAnime;
+  animation-duration: 1.2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 
 }
 
-@keyframes PageAnime{
-	0% {
-		transform-origin:right;
-		transform:scaleX(0);
-	}
-	50% {
-		transform-origin:right;
-		transform:scaleX(1);
-	}
-	50.001% {
-		transform-origin:left;
-	}
-	100% {
-		transform-origin:left;
-		transform:scaleX(0);
-	}
+@keyframes PageAnime {
+  0% {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+
+  50% {
+    transform-origin: right;
+    transform: scaleX(1);
+  }
+
+  50.001% {
+    transform-origin: left;
+  }
+
+  100% {
+    transform-origin: left;
+    transform: scaleX(0);
+  }
 }
 
 /*画面遷移の後現れるコンテンツ設定*/
 
-#container{
-	opacity: 0;/*はじめは透過0に*/
+#container {
+  opacity: 0;
+  /*はじめは透過0に*/
 }
 
 /*bodyにappearクラスがついたら出現*/
-body.appear #container{
-	animation-name:PageAnimeAppear;
-	animation-duration:1s;
-	animation-delay: 0.8s;
-	animation-fill-mode:forwards;
-	opacity: 0;
+body.appear #container {
+  animation-name: PageAnimeAppear;
+  animation-duration: 1s;
+  animation-delay: 0.8s;
+  animation-fill-mode: forwards;
+  opacity: 0;
 }
 
-@keyframes PageAnimeAppear{
-	0% {
-	opacity: 0;
-	}
-	100% {
-	opacity: 1;
-}
+@keyframes PageAnimeAppear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 
@@ -104,70 +111,82 @@ header {
   padding: 15px 0;
   margin: 0 auto;
   text-align: center;
-    color:white;
-	background-color:#333;
-	border-bottom-right-radius: 7px;
-	border-bottom-left-radius: 7px;
+  color: white;
+  background-color: #333;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
 }
-header .headline{
+
+header .headline {
   font-size: 32px;
 }
+
 .nav-list {
   text-align: center;
   padding: 10px 0;
   margin: 0 auto;
 }
+
 .nav-list-item {
   list-style: none;
   display: inline-block;
   margin: 0 20px;
 }
 
-.max,.min{
-	height:25px;
-	width:40px;
-	border-radius: 7px;
-	text-align: center;
+.max,
+.min {
+  height: 25px;
+  width: 40px;
+  border-radius: 7px;
+  text-align: center;
 }
 
-.form{
-    text-align: center;
+.form {
+  text-align: center;
 }
 
-.range{
-  font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
+.range {
+  font-family: 'M PLUS Rounded 1c', "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
   text-align: center;
   margin: 20px;
 }
 
-.msg{
+.msg {
   margin-top: 50px;
   margin-bottom: 5px;
-  font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
+  font-family: 'M PLUS Rounded 1c', "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
   text-align: center;
 }
 
-.ans{
-	margin-top: 5px;
-	margin-bottom: 50px;
-	font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
-	text-align: center;
+.ans {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: 'M PLUS Rounded 1c', "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
+  text-align: center;
 }
 
-.input{
+.whole_answer{
+    
+}
+
+.material-symbols-outlined {
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.input {
   text-align: center;
   position: relative;
   width: 56%;
   margin-bottom: 10px;
-    margin-left:auto;
-    margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.ef{
-}
+.ef {}
 
 .input input[type='text'] {
-    text-align: center;
+  text-align: center;
   font: 15px/1.6 sans-serif;
   width: calc(100% - 20px);
   padding: 0.3em;
@@ -177,8 +196,9 @@ header .headline{
   border-radius: 4px;
   transition: 0.3s;
 }
+
 .input .ef input[type='text']:focus {
-    text-align: center;
+  text-align: center;
   outline: none;
   box-shadow: inset 1px 1px 2px 0 #333;
 }
@@ -187,193 +207,197 @@ header .headline{
     border: 2px solid #000000; 
     z-index: 10;
     outline: 0;
-	border-radius: 7px;
+  border-radius: 7px;
 }
 
 .nameText{
     border: 2px solid #000000; 
     z-index: 10;
     outline: 0;
-	border-radius: 7px;
+  border-radius: 7px;
 } */
 
 
-.cerebrate{
-	text-align: center;
-	margin: 50px;
-	font-family: 'M PLUS Rounded 1c',"ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
+.cerebrate {
+  text-align: center;
+  margin: 50px;
+  font-family: 'M PLUS Rounded 1c', "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
 }
 
-.missedword{
-	text-align: center;
+.missedword {
+  text-align: center;
 }
 
-.btn03{
-    /*影の基点とするためrelativeを指定*/
-    position: relative;
-    /*ボタンの形状*/
-	text-decoration: none;
-	display: inline-block;
-    text-align: center;
-    background: transparent;
-	border-radius: 5px;
-	border: solid 1px #000;
-    outline: none;
-    /*アニメーションの指定*/
-    transition: all 0.1s ease;
+.btn03 {
+  /*影の基点とするためrelativeを指定*/
+  position: relative;
+  /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  background: transparent;
+  border-radius: 5px;
+  border: solid 1px #000;
+  outline: none;
+  /*アニメーションの指定*/
+  transition: all 0.1s ease;
 }
 
 /*hoverをした後のボタンの形状*/
-.btn03:hover{
-	border-color:transparent;	
+.btn03:hover {
+  border-color: transparent;
 }
 
 /*ボタンの中のテキスト*/
 .btn03 span {
-	position: relative;
-	z-index: 2;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-    /*テキストの形状*/
-	display: block;
-    padding: 3px 10px;
-	background:#fff;
-	border-radius: 5px;
-	color:#000;
-    /*アニメーションの指定*/
-    transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  /*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  /*テキストの形状*/
+  display: block;
+  padding: 3px 10px;
+  background: #fff;
+  border-radius: 5px;
+  color: #000;
+  /*アニメーションの指定*/
+  transition: all 0.3s ease;
 }
 
-.btn04{
-    /*影の基点とするためrelativeを指定*/
-    position: relative;
-    /*ボタンの形状*/
-	text-decoration: none;
-	display: inline-block;
-    text-align: center;
-    background: transparent;
-	border-radius: 5px;
-	border: solid 1px #333;
-    outline: none;
-    /*アニメーションの指定*/
-    transition: all 0.1s ease;
-	margin-top: 10px;
+.btn04 {
+  /*影の基点とするためrelativeを指定*/
+  position: relative;
+  /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  background: transparent;
+  border-radius: 5px;
+  border: solid 1px #333;
+  outline: none;
+  /*アニメーションの指定*/
+  transition: all 0.1s ease;
+  margin-top: 10px;
 }
 
 /*hoverをした後のボタンの形状*/
-.btn04:hover{
-	border-color:transparent;	
+.btn04:hover {
+  border-color: transparent;
 }
 
 /*ボタンの中のテキスト*/
 .btn04 span {
-	position: relative;
-	z-index: 2;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-    /*テキストの形状*/
-	display: block;
-    padding: 3px 10px;
-	background:#fff;
-	border-radius: 5px;
-	color:#333;
-    /*アニメーションの指定*/
-    transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  /*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  /*テキストの形状*/
+  display: block;
+  padding: 3px 10px;
+  background: #fff;
+  border-radius: 5px;
+  color: #333;
+  /*アニメーションの指定*/
+  transition: all 0.3s ease;
 }
 
 
-.retry{
-	text-align: center;
-    margin-top:20px;
+.retry {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.btn05{
-    /*影の基点とするためrelativeを指定*/
-    position: relative;
-    /*ボタンの形状*/
-	text-decoration: none;
-	display: inline-block;
-    text-align: center;
-    background: transparent;
-	border-radius: 5px;
-	border: solid 1px #333;
-    outline: none;
-    /*アニメーションの指定*/
-    transition: all 0.1s ease;
+.btn05 {
+  /*影の基点とするためrelativeを指定*/
+  position: relative;
+  /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  background: transparent;
+  border-radius: 5px;
+  border: solid 1px #333;
+  outline: none;
+  /*アニメーションの指定*/
+  transition: all 0.1s ease;
 }
 
 /*hoverをした後のボタンの形状*/
-.btn05:hover{
-	border-color:transparent;	
+.btn05:hover {
+  border-color: transparent;
 }
 
 /*ボタンの中のテキスト*/
 .btn05 span {
-	position: relative;
-	z-index: 2;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-    /*テキストの形状*/
-	display: block;
-    padding: 3px 10px;
-	background:#fff;
-	border-radius: 5px;
-	color:#333;
-    /*アニメーションの指定*/
-    transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  /*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  /*テキストの形状*/
+  display: block;
+  padding: 3px 10px;
+  background: #fff;
+  border-radius: 5px;
+  color: #333;
+  /*アニメーションの指定*/
+  transition: all 0.3s ease;
 }
 
-.btn06{
-    /*影の基点とするためrelativeを指定*/
-    position: relative;
-    /*ボタンの形状*/
-	text-decoration: none;
-	display: inline-block;
-    text-align: center;
-    background: transparent;
-	border-radius: 5px;
-	border: solid 1px #000;
-    outline: none;
-    /*アニメーションの指定*/
-    transition: all 0.1s ease;
-    margin-left: 10px
+.btn06 {
+  /*影の基点とするためrelativeを指定*/
+  position: relative;
+  /*ボタンの形状*/
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  background: transparent;
+  border-radius: 5px;
+  border: solid 1px #000;
+  outline: none;
+  /*アニメーションの指定*/
+  transition: all 0.1s ease;
+  margin-left: 10px
 }
 
 /*hoverをした後のボタンの形状*/
-.btn06:hover{
-	border-color:transparent;	
+.btn06:hover {
+  border-color: transparent;
 }
 
 /*ボタンの中のテキスト*/
 .btn06 span {
-	position: relative;
-	z-index: 2;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-    /*テキストの形状*/
-	display: block;
-    padding: 3px 10px;
-	background:#fff;
-	border-radius: 5px;
-	color:#000;
-    /*アニメーションの指定*/
-    transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  /*z-indexの数値をあげて文字を背景よりも手前に表示*/
+  /*テキストの形状*/
+  display: block;
+  padding: 3px 10px;
+  background: #fff;
+  border-radius: 5px;
+  color: #000;
+  /*アニメーションの指定*/
+  transition: all 0.3s ease;
 }
 
 /*== 右下に押し込まれる（立体が平面に） */
 
 /*影の設定*/
 .pushright:before {
-    content: "";
-    /*絶対配置で影の位置を決める*/
-    position: absolute;
-	z-index: -1;
-    top: 4px;
-    left: 4px;
-    /*影の形状*/
-    width: 100%;
-    height: 100%;
-	border-radius: 5px;
-    background-color: #333;
+  content: "";
+  /*絶対配置で影の位置を決める*/
+  position: absolute;
+  z-index: -1;
+  top: 4px;
+  left: 4px;
+  /*影の形状*/
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #333;
 }
 
 /*hoverの際にX・Y軸に4pxずらす*/
 .pushright:hover span {
-	background-color: #333;
-	color: #fff;
-	transform: translate(4px, 4px);
+  background-color: #333;
+  color: #fff;
+  transform: translate(4px, 4px);
 }
 
 /*ポップアップ*/
@@ -383,97 +407,210 @@ header .headline{
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
 
 @keyframes fadeOut {
-    0% {
-        opacity: 1; /*初めに存在する*/
-    }
-    100% {
-        opacity: 0; /*最後に消える*/
-    }
+  0% {
+    opacity: 1;
+    /*初めに存在する*/
+  }
+
+  100% {
+    opacity: 0;
+    /*最後に消える*/
+  }
 }
 
 
-#popup{
-    display: none;
+#popup {
+  display: none;
 }
 
-#popup~.popup-overlay{
-    animation: fadeOut 2s; /*keyframesで命名したものを使う。2秒間で消える*/
-    animation-fill-mode: both; /*0%の時と100%の時の状態を保つ*/
+#popup~.popup-overlay {
+  animation: fadeOut 2s;
+  /*keyframesで命名したものを使う。2秒間で消える*/
+  animation-fill-mode: both;
+  /*0%の時と100%の時の状態を保つ*/
 }
 
-.popup-open{
-    cursor: pointer;
+.popup-open {
+  cursor: pointer;
 }
 
-.popup-overlay{
-    display: none;
+.popup-overlay {
+  display: none;
 }
 
-#popup:checked~.popup-overlay{
-    display:block;
-    z-index: 99999;
-    background-color:#00000070;
-    position:fixed;
+#popup:checked~.popup-overlay {
+  display: block;
+  z-index: 99999;
+  background-color: #00000070;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  animation: fadeIn 0.7s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.popup-window {
+  width: 90vw;
+  max-width: 560px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  margin-left: 50%;
+  margin-right: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-text {
+  margin: 0;
+}
+
+.popup-text:not(:last-of-type) {
+  margin-bottom: 1em;
+}
+
+.popup-close {
+  cursor: pointer;
+  position: absolute;
+  top: -26px;
+  right: 0;
+}
+
+#list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  /* max-width: 400px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#list li {
+  margin: 10px;
+  padding: 15px;
+  border: 2px solid #333333ba;
+  border-radius: 10px;
+}
+
+#list li.hint {
+  border: 2px dashed #dfdfdf;
+}
+
+#list li.active {
+  border: 2px dashed #333;
+}
+
+
+
+.buttons{
+    display: ruby;
+}
+
+.mode_swicher .checkbox {
+    display: table-cell;
     width: 100%;
-    height:100vh;
-    top:0;
-    left:0;
-    animation: fadeIn 0.7s cubic-bezier(0.33, 1, 0.68, 1) forwards;
-}
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+  }
 
-.popup-window{
-    width:90vw;
-    max-width:560px;
-    padding:20px;
-    background-color:#ffffff;
-    border-radius:6px;
-	position:absolute;
-    top:50%;
-    margin-left:50%;
-	margin-right:50%;
-    transform: translate(-50%, -50%);
-}
+  .mode_swicher label {
+    display: inline-block;
+    color: #333;
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  .mode_swicher label span {
+    display: inline-block;
+    position: relative;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    transform-origin: center;
+    border: 2px solid #333;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+  }
+  .mode_swicher label span:before {
+    content: "";
+    width: 0px;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    position: absolute;
+    transform: rotate(45deg);
+    top: 13px;
+    left: 9px;
+    transition: width 50ms ease 50ms;
+    transform-origin: 0% 0%;
+  }
+  .mode_swicher label span:after {
+    content: "";
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    position: absolute;
+    transform: rotate(305deg);
+    top: 16px;
+    left: 10px;
+    transition: width 50ms ease;
+    transform-origin: 0% 0%;
+  }
+  .mode_swicher label:hover span:before {
+    width: 5px;
+    transition: width 100ms ease;
+  }
+  .mode_swicher label:hover span:after {
+    width: 10px;
+    transition: width 150ms ease 100ms;
+  }
 
-.popup-text{
-    margin:0;
-}
-
-.popup-text:not(:last-of-type){
-    margin-bottom:1em;
-}
-
-.popup-close{
-    cursor:pointer;
-    position:absolute;
-    top:-26px;
-    right:0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  .mode_swicher input[type=checkbox] {
+    display: none;
+  }
+  .mode_swicher input[type=checkbox]:checked + label span {
+    background-color: #333;
+    transform: scale(1.25);
+  }
+  .mode_swicher input[type=checkbox]:checked + label span:after {
+    width: 10px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  .mode_swicher input[type=checkbox]:checked + label span:before {
+    width: 5px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  .mode_swicher input[type=checkbox]:checked + label:hover span {
+    background-color: #333;
+    transform: scale(1.25);
+  }
+  .mode_swicher input[type=checkbox]:checked + label:hover span:after {
+    width: 10px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  .mode_swicher input[type=checkbox]:checked + label:hover span:before {
+    width: 5px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }

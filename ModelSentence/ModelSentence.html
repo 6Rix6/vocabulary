@@ -1,187 +1,658 @@
 <!DOCTYPE html>
-  <html lang="ja">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="icon" href="img/icon.webp">
-      <link rel="stylesheet" href="./mdstyle.css" />
-      <title>ターゲット</title>
-    </head>
+<html lang="ja">
 
-      
-    <body>
-        <div id="splash">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=volume_up" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="img/icon.webp">
+    <link rel="stylesheet" href="./mdstyle.css" />
+    <title>ターゲット</title>
+</head>
+
+
+<body>
+    <div id="splash">
         <div id="splash-logo"></div>
-        <!--/splash--></div>
-        <div class="splashbg"></div><!---画面遷移用-->
+        <!--/splash-->
+    </div>
+    <div class="splashbg"></div><!---画面遷移用-->
 
 
-        <div id="container">
+    <div id="container">
         <header>
             <h1 class="headline">
                 <a>ModelSentence</a>
             </h1>
 
 
-            
-    <!--<a href = "../index.html">戻る</a>-->
-        <!----------------範囲入力欄--------------------->
-      <div class="range">
-          <label class = "ef">範囲：
-            <input class="min" type="number" id="min" min = "1" max = "500">
-          </label>
-          <label class="ef" for="name">〜
-            <input class="max" type="number" id="max" min = "1" max = "500">
-          </label>
-          <!--<input class = "submit" type = "button" value = "決定">-->
-          <a href="#" class="btn03 pushright"><span>決定</span></a>
-      </div>
 
-            </header>
+            <!--<a href = "../index.html">戻る</a>-->
+            <!----------------範囲入力欄--------------------->
+            <div class="range">
+                <label class="ef">範囲：
+                    <input class="min" type="number" id="min" min="1" max="500">
+                </label>
+                <label class="ef" for="name">〜
+                    <input class="max" type="number" id="max" min="1" max="500">
+                </label>
+                <!--<input class = "submit" type = "button" value = "決定">-->
+                <a href="#" class="btn03 pushright"><span>決定</span></a>
+            </div>
+
+        </header>
 
         <!----------------メイン部分----------------------->
-      <div class="form">
-          
-            <font size="5"><p class = "msg" id="msg"></p></font>
+        <div class="form">
 
-            <font size="5"><p class = "choice" id="choice"></p></font>
-          
-            <font size="5"><p class = "ans" id="ans"></p></font>
-          
-            <div class = "a"><a class = "b">100</a><a>/</a><a class = "c">500</a></div>
-          
-            <div class = "input">
+            <font size="5">
+                <p class="msg" id="msg"></p>
+            </font>
+
+            <font size="5">
+                <p class="choice" id="choice"></p>
+            </font>
+
+            <div class="choicelist">
+                <ul id="list">
+                </ul>
+            </div>
+
+            <div class="whole_answer">
+                <font size="5">
+                    <p class="ans" id="ans"></p>
+                </font>
+                <div id="speaker" hidden>
+                    <span class="material-symbols-outlined">
+                        volume_up
+                    </span>
+                </div>
+            </div>
+
+            <div class="a"><a class="b">100</a><a>/</a><a class="c">500</a></div>
+
+            <div class="input">
                 <label class="ef">
                     <input class="nameText" type="text" id="nameText">
                 </label>
             </div>
-          
-            <a href="#" class="btn04 pushright"><span>answer</span></a>
-          <a href="#" class="btn06 pushright"><span>金内亮に質問する</span></a>
-          
-       </div>
 
-            <!-------------------埋め込みAI----------------------->
-
-            <div id="chatbot-toggle_button">
-                <a id="chat-button" href="#">
-                    <img src="img/chaticon.png" width="100" height="100">
-                </a>
+            <div class="buttons">
+                <a href="#" class="btn04 pushright"><span>答えを見る</span></a>
+                <a href="#" class="btn06 pushright"><span>金内亮に質問する</span></a>
+                <div class="mode_swicher">
+                  <input type="checkbox" id="mode" name="check" class = "mode" value="" />
+                  <label for="mode">
+                    <span></span>ドラッグで並べ替え
+                  </label>
+                </div>
             </div>
-            
+
+                
+
+        </div>
+
+        <!-------------------埋め込みAI----------------------->
+
+        <div id="chatbot-toggle_button">
+            <a id="chat-button" href="#">
+                <img src="img/chaticon.png" width="100" height="100">
+            </a>
+        </div>
+
         <!---------------------ポップアップ---------------------->
-        <div class = "popup-main">
-        <input type = "checkbox" id = "popup"> <!--ここのチェックをつけたり外したりすればいいらしい-->
-        <label class = "popup-open" for = "popup"></label> <!--この中身でポップアップ出す表示、デバッグ用-->
-        <div class = "popup-overlay">
-            <div class = "popup-window">
-                <section class = "popup-text">
-                    <font size="7"><p class = "cerebrate"></p></font>
-                    <p class = "missedword"></p>
-                    <table class = "resultTable" id="resultTable"></table>
-                    <div class="retry">
-                    <a href="#" class="btn05 pushright"><span>もう一度</span></a>
-                    </div>
-                </section>
-                <label class="popup-close" for="popup">
-                    <!-- <svg width = "18" height = "18" xmlns="https://www.w3.org/2000/svg">
+        <div class="popup-main">
+            <input type="checkbox" id="popup"> <!--ここのチェックをつけたり外したりすればいいらしい-->
+            <label class="popup-open" for="popup"></label> <!--この中身でポップアップ出す表示、デバッグ用-->
+            <div class="popup-overlay">
+                <div class="popup-window">
+                    <section class="popup-text">
+                        <font size="7">
+                            <p class="cerebrate"></p>
+                        </font>
+                        <p class="missedword"></p>
+                        <table class="resultTable" id="resultTable"></table>
+                        <div class="retry">
+                            <a href="#" class="btn05 pushright"><span>もう一度</span></a>
+                        </div>
+                    </section>
+                    <label class="popup-close" for="popup">
+                        <!-- <svg width = "18" height = "18" xmlns="https://www.w3.org/2000/svg">
                         <line x1="0" y1="0" x2="18" y2="18" stroke="white" stroke-width="3"></line>
                         <line x1="0" y1="18" x2="18" y2="0" stroke="white" stroke-width="3"></line>
                     </svg> -->
-                 </label>
+                    </label>
+                </div>
             </div>
-        </div>
         </div>
 
         <style>
-        table, td, th {
-            border-collapse: collapse;
-            border:1px solid #333;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top : 20px;
-        }
-        td{
-            padding: 5px;
-        }
-        td.THUMBNAIL img{
-            width: 100px;
-        }
+            table,
+            td,
+            th {
+                border-collapse: collapse;
+                border: 1px solid #333;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 20px;
+            }
+
+            td {
+                padding: 5px;
+            }
+
+            td.THUMBNAIL img {
+                width: 100px;
+            }
         </style>
-<!------------------------ワードリスト------------------------------->
-<div class="wordlist" 
-data-word="1@formerly most Japanese houses were made of wood@昔はほとんどの日本の家は木造でした
-2@you look pale. what is the matter with you ?@顔色が良くないですね。どうしたのですか。
-301@the parking lot was empty except for that huge truck@駐車場はその巨大なトラックのほかは一台も車はなかった
-302@to the best of my knowledge ,he thinks of everything in terms of money@ぼくの知る限りでは、彼は何でも金銭に結びつけて考える
-303@let me say a few words by way of suggestion@提案として一言二言言わせてください
-304@he took every possible step to get on in life at the cost of his health@彼は出世するために、健康を害してまでもありとあらゆる手段を取った
-305@the ship was at the mercy of a mountain of a wave and the crew were face to face with death@船は山のような波のなすがままになり、乗組員たちは死に直面していた
-306@i hope mother is in a good ,or she will be angry with me for coming home late@お母さんの機嫌が良ければいいのだが。でないと遅く帰ったことで私を怒るだろう
-307@she has no eye for jewels ;she can't tell the real from the false@彼女は宝石を見る目がない。本物と偽物の区別がつかないのだ
-308@Between ourselves ,sam wants to be independent of his father@ここだけの話だが、サムは父親から独立したがっているんだ
-309@with all his wealth ,he was far from being happy@そんなに財産がありながら、彼は決して幸福ではなかった
-310@what a pity that he ,of all men ,should fall a victim to a fatal disease!@よりによって彼が不治の病にかかるとは何という残念なことだ
-311@those who visit niagara falls are sure to be surprised at their magnitude@ナイアガラの滝をおとずれる人たちは必ずその壮大さに驚く
-312@he mentioned the book whose title has slipped my memory@私がその題名を失念してしまった本のことを彼は話に出した
-313@'botchan' is based on the experiences which the author had while teaching in a certain middle school in shikoku@「坊っちゃん」は作者が四国のある中学で教師をしていた頃の経験に基づいている
-314@soseki natume is an author who i greatly admire . he is one of the greatest writers that japan has ever produced@夏目漱石は私の大いに崇拝する作家です。彼は日本が生んだ最も偉大な作家の一人です
-315@who that has pride can stand such an insult ?@誇りを持った人間なら誰がそのような侮辱に耐えられようか
-316@she is not the woman that she used to be@彼女は昔の彼女ではない
-317@i was annoyed at the abrupt way in which she left us@彼女がだしぬけに立ち去ったのに私は腹を立てた
-318@what struck me particularly was the ease with witch he got through the work@特に感銘の深かったのは彼がその仕事をいかにもやすやすとやってのけたことであった
-319@there was nothing he liked better than reading and traveling ,which added a good deal to his stock of knowledge@読書と旅行ほど彼の好きなものはなかったがこれが彼の知識を大いに豊かにしたのであった
-320@in due course he graduated from the college with honors ,and what was better still ,he was offered the very job he had long wanted@やがて彼は大学を優等で卒業したがそれにも増していいことには、かねてから希望していた職についた
-321@his wife ,who is french ,can speak english better than he does@彼の奥さんはフランス人だが、彼より英語が上手だ
-322@the game ended in a victory for school'b' ,by a score of 5 to 2 ,which was quite a surprise to us@試合は５対２のスコアでB校の勝利に終わったが、番狂わせであった
-323@i saw among the crowd a man who i thought was your brother@ぼくは群衆の中に君の兄さんだと思う人を見かけました
-324@will you recommend a reference book i can read easily which is rich in contents ?@簡単に読めて内容が豊富な参考書を推薦してくれませんか
-325@even as a child he would often amaze grown-up people with his unusual ability. he seems to have been what you call an infant genius@彼は子供の頃でも、その非凡な才能によって大人たちをしばしば驚かせた。いわゆる神童であったらしい
-326@reading is to the mind what food is to the body@読書と精神の関係は、食物と肉体の関係と同じである
-327@read such books as make you the wiser for reading them@読んだらそれだけ賢くなるような本を読みなさい
-328@you are going through the same trial as i did years ago@君たちは今、私が何年も前に経験したのと同じ訓練を経験しているのだ
-329@as is often the case ,the streetcar i took this morning was awfully crowded@いつものことだが、今朝の電車は恐ろしく混んでいた
-330@there is no rule but has some exceptions@例外のない規則はない
-331@the doctor told him to take a few days' rest ,which he followed@医者は彼に二、三日休養を取るように言った。そして彼はその忠告に従った
-332@he used what little money he had saved to tide over the crisis@彼はその危機を乗り切るために、貯えていたわずかな金を全部使った
-333@the time will soon come when we can enjoy space travel@宇宙旅行を楽しむことのできる時がやがて来るでしょう
-334@there are some cases  where  honesty does not pay@正直者がばかをみることもある
-335@the only reason that i paint is that i can't help it@私が絵を描く唯一の理由は、描かずにはいられないからです
-336@she was just going to tell me more ,when her father charged into the apartment ,scarlet with anger@彼女が私にもっと話そうとしたちょうどその時、彼女の父が真っ赤になって怒りながらその部屋に飛び込んできた
-337@finally he went to boston ,where he settled down for the rest of his life@最後に彼はボストンに行き、そこに定住して余生を送った
-338@i'd like to have completed my graduation thesis somehow by the time the vacation comes to an end@休暇が終わるまでに、なんとか卒論を仕上げてしまいたい
-339@the fates seldom give us what we want in the way we want it@運命の女神が、我々の望むものを、望ましいと思う仕方で与えてくれる事はまずない
-340@he is masculine and very considerate . that's why i like him@あの人は男らしくてとても思いやりがあるのです。それで私はあの人が好きなのです
-341@he would not listen to whoever opposed him@彼は誰でも自分に反対する人に耳を貸そうとしなかった
-342@whichever of you comes in first will receive the prize@君たちのうちどちらでも最初にゴールインしたものが賞をもらうことになる
-343@he succeeds in whatever he undertakes ;for he is not only industrious but also careful@彼は何を企てても成功する。というのも勤勉であるばかりでなく注意深いからである
-344@you may use this money for whatever purpose you choose@君は何でも好きな目的にこの金を使って良い
-345@you can come whenever it is convenient to you@いつでも都合の良い時に来ていいよ
-346@whomever she spoke to ,she was invariably polite@彼女は誰と話しても、いつも礼儀正しかった
-347@whichever way we may look ,we see nothing but mountains@どちらを見ても山ばかりだ
-348@whatever business you may be engaged in ,you cannot hope for success unless you apply yourself to it heart and soul@どんな職業に従事しても、一生懸命にそれをしなければ成功は望めません
-349@wherever we may go in the city ,we find large buildings under construction ,and the cars driving about have remarkably increased in number@その市ではいたるところで大きな建物が建設中ですし、走り回っている自動車の数もめっきり増えてきました
-350@however hard we tried ,we could not keep the fire from spreading@いくらやってみても、我々は火が広がるのを防ぐことはできなかった
-351@night had completely fallen before we were aware of it@いつの間にかすっかり夜になっていた
-352@as we drove on ,the sound of music died gradually away until we could no longer hear it@車を走らせてゆくにつれて、音楽は次第に音が小さくなってついにはもはや聞こえなくなった。
-353@people do not know the blessing of health till they lose it@人は健康を失って初めてそのありがたみが分かる
-354@the first time i saw him ,i did not think that there was in him anything out of the ordinary@はじめて彼にあった時、別に普通の人と変わっているところがあるとは思わなかった
-355@the child burst into tears the moment he saw his mother enter the room@子供は母親が部屋に入ってくるのを見た途端、わっと泣き出した
-356@immediately he put down the receiver with a sigh of relief ,the telephone rang again@彼がホッとして受話器をおいたら、すぐにまた電話がなった
-357@he had hardly taken a few bites when he complained of a stomachache@彼は二口か、三口食べるか食べないうちに、腹痛を訴えた
-358@no sooner had i entered the school gates than i heard the bell ringing . i ran into the classroom barely in time@校門に入るのと同時にベルが鳴っているのが聞こえた
-359@while hot ,iron can be beaten into almost any shape ,but once cooled down ,it becomes inflexible@暑い間は、鉄は叩いてほとんどどんな形にもすることができるが、いったん冷えてしまうと曲がらなくなる
-360@he makes a point of putting everything back where it was@彼は何でも、元あったところに返しておくことにしている。
-361@unless we develop other sources of energy ,our entire way of life will change to a shocking extent@他のエネルギー源を開発しなければ、我々の全生活様式はひどく変化するであろう
-362@in case he arrives before i get back  ,never fail to contact me@私が帰ってくるまでに彼が到着した場合には、必ず私に連絡してくれ
-363@as long as i live ,i shall never forget the deep emotion i felt that day@僕はあの日の感激を生涯忘れないでしょう
-364@so far as i am concerned ,i have no objection to explaining the plan in detail@私に関する限り、その計画を詳しく説明するのに異議はありません
-365@not a day passes but traffic accidents are reported@一日として交通事故が報道されない日はない"
-hidden></div>
-<!----------------------ここまでワードリスト-------------------------------->
-            </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      <script src="./mdapp.js"></script>
-    </body>
-  </html>
+        <!------------------------ワードリスト------------------------------->
+        <div class="wordlist" data-word="1@Formerly most Japanese houses were made of wood.@昔はほとんどの日本の家は木造でした。
+2@You look pale. What is the matter with you?@顔色が良くないですね。どうしたのですか。
+3@I've got a pain in my stomach. That's too bad.@「胃が痛むんです。」「それはいけませんね。」
+4@The rich are not always happier than the poor.@金持ちは必ずしも貧しい人達より幸福とは限らない。
+5@Leave him as he is.@彼をそのままにしておけ。
+6@I sent for the doctor, but unfortunately he was out.@医者を呼びにやったが，あいにく留守だった。
+7@The day was just dawning when we got to the summit.@山頂に着いたとき，ちょうど夜が明けようとしていた。
+8@The thermometer stood at 23℃ at noon today.@今日の正午は摂氏２３度だった。
+9@Do you have such frequent earthquakes in your country?@お国ではこんなに度々地震がありますか。
+10@It is five years since he died.@彼が死んでから５年になります。
+11@There used to be a big factory in my neighborhood.@僕の家の近くに以前大きな工場があった。
+12@There are a lot of beautiful flowers blooming all the year round there.@そこには沢山の美しい花が一年中咲いています。
+13@There was little water left in the bottle.@びんの中には水はほとんど残っていませんでした。
+14@There's someone wants you on the phone.@どなたかからお電話です。
+15@There came a heavy snowstorm towards evening.@夕方頃，激しい吹雪がやってきた。
+16@Be it ever so humble, there's no place like home.@いくら貧しくてもわが家ほど良い所はない。
+17@There is something noble about him.@彼にはどことなく気高いところがある。
+18@There is no accounting for tastes.@たで食う虫も好き好き。
+19@There is nothing for it but to wait till he comes back.@彼が帰ってくるのを待つより仕方がない。
+20@Here is my answer to your question.@あなたの御質問に対する私の返事はこうです。
+21@It is a quarter past ten by my watch.@僕の時計では10時15分です。
+22@It was not long before he came to be looked upon as a genius.@それから間もなく彼は天才と見なされるようになりました。
+23@It looks like rain. Take an umbrella with you.@雨になりそうだ。傘を持って行きなさい。
+24@How far is it from here to the lake? It is about two kilometers.@「ここから湖までどのくらいありますか。」「約２キロメートルです。」
+25@It seems to me that things are going from bad to worse.@僕には事態は悪化しているように思える。
+26@It happened that he was laid up with a cold when I dropped in.@僕が立ち寄ったとき，たまたま彼は風邪で寝ていた。
+27@It appeared as if the whole city would be blown away by the violent wind.@市全体がその激しい風に吹き飛ばされてしまいそうだった。
+28@It may be that he will catch it.@もしかすると彼は叱られるかも知れない。
+29@Surrounded by the enemy on all sides, I thought it was all over with me.@四方を敵に囲まれ，僕はもうこれまでだと思った。
+30@Somebody is knocking at the door. Go and see who it is.@だれか戸をたたいている。見てきてごらん。
+31@It is not good for the health to sit up too late at night.@あまり遅くまで夜更かしするのは健康に良くないよ。
+32@It is next to impossible to master a foreign language in so short a period of time.@そんな短期間に外国語を物にするのはほとんど不可能です。
+33@It is not too much to say that he owes his present success to the influence of his uncle.@彼の現在の成功は叔父の感化によると言っても言い過ぎではない。
+34@It necessary for the nations for the world to get along with each other.@世界の国々がお互いに仲良くして行くことが必要です。
+35@It was careless of him to leave his camera on the train.@列車の中にカメラを忘れるとは彼も不注意だった。
+36@I think you can have a good idea of the distance of the sun when I say it takes light about eight minutes to travel from the sun to the earth.@光が太陽から地球まで伝わるのにおよそ８分かかると言えば太陽との距離がよく分かると思います。
+37@It cost me five thousand yen to have this television set repaired.@このテレビを修理してもらうのに5,000円かかった。
+38@It was no good asking my father if I could go swimming by myself.@ひとりで泳ぎに行ってもよいかと父に尋ねても無駄であった。
+39@It will be no use your asking his opinion. It's a matter for you to decide.@彼の意見を求めても無駄でしょう。それは君が決める事です。
+40@It is worth while to visit the place I have just mentioned.@僕が今話に出した場所は行ってみるだけの価値がある。
+41@It is true that he did it on purpose to deceive me.@彼が僕を騙すためにわざとそうしたのは本当です。
+42@It is strange that cherry blossoms should come out at this time of the year.@桜の花が今時分咲くとは変だ。
+43@It is a great pity that he should have failed the entrance examination.@彼が入学試験に失敗したのは大変残念です。
+44@It does not follow that good books always sell well.@だからといっていつも良い本がよく売れるということにはなりません。
+45@All at once it struck him that he had lost his way.@突然道を間違えたのではないかという考えが彼の頭をかすめた。
+46@It is truly said that the prosperity of a country depends chiefly upon the character of its people.@一国の繁栄は主にその国民の性質によるとは至言である。
+47@It goes without saying that health is above wealth.@健康が富に勝ることは言うまでもない。
+48@It is not clear why he was absent from school the day before yesterday.@彼がなぜ一昨日学校を休んだのか明らかではない。
+49@It is doubtful whether he is up to the task.@彼がその仕事をやってのけられるかどうか怪しいものだ。
+50@It matters little whether you have good brains or not. What matters is how you use your brains.@頭の良し悪しは大して問題ではない。問題はいかに頭を使うかにある。
+51@A previous engagement prevents me from accepting your invitation.@先約がありますので，御招待はお受けできません。
+52@His visit spared me the trouble of writing to him.@彼が訪ねてきてくれたので，彼に手紙を出す手間が省けた。
+53@A few minutes' walk brought us to the square.@数分歩くと我々は広場に着いた。
+54@This photo always reminds me of the night view of Hong Kong, where I made a stopover on my way to Europe.@この写真を見るとヨーロッパへ行く途中立ち寄った香港の夜景をいつも思い出します。
+55@Every night found him poring over his book.@毎晩彼は熱心に本を読んでいた。
+56@This medicine will make you feel better.@この薬を飲めば気分が良くなるでしょう。
+57@A little reflection will show you what a thoughtless plan it is.@ちょっと考えてみるとそれがどんなに軽率な計画であるか分かるでしょう。
+58@The translation of the book cost him five years' labor.@その本を翻訳するのに彼は５年苦労した。
+59@What caused him to change his mind?@なぜ彼は気が変わったのだろう。
+60@No amount of wealth satisfied him.@いくら金持ちになっても彼は満足しなかった。
+61@Yesterday a biting north wind was blowing hard all day long.@昨日は肌を刺すような北風が一日中強く吹いていた。
+62@Much to their delight, the baby weighed ten pounds.@彼らにとって大変うれしいことに，赤ん坊は体重が10ポンドあった。
+63@The manager always travels first class.@支配人はいつも一等で旅行しています。
+64@This sweater looks beautiful. Will it wash?@このセーターはきれいですね。洗濯できますか。
+65@Any book will do as long as it is interesting.@面白くさえあれば，どの本でも結構です。
+66@The speaker apologized to the audience for his mistake.@講演者は間違いを聴衆に謝った。
+67@Housewives complain about high prices of commodities.@主婦たちは物価高をこぼしている。
+68@I agree with you on this point, but I don't think he should run for the Diet in the next election.@この点については君と同じ意見ですが，彼は次の選挙で国会議員に立候補すべきではないと思います。
+69@He insisted on the importance of being punctual.@彼は時間厳守の大切なことを力説した。
+70@We have heard nothing of the explorer since. What has become of him?@それ以来私たちはその探検家の消息を聞かない。彼はどうなったのだろうか。
+71@I am a first-year student of Aiko Senior High School. All of our lessons are pretty difficult.@僕は愛光高等学校の１年生です。授業はどれもかなり難しい。
+72@His only wish is to make a doctor of his son.@彼の唯一の望みは息子を医者にすることです。
+73@The story may sound strange, but it is true.@その話は不思議に聞こえるかも知れないが，本当です。
+74@The leaves of this tree turn yellow in autumn.@この木の葉は秋になると黄色くなる。
+75@He often studies far into the night. I am afraid he may fall ill.@彼はよく夜遅くまで勉強する。病気になりはしないか心配だ。
+76@Take moderate exercise, and you will feel refreshed in mind and body.@適度の運動をすれば，心身ともにリフレッシュしますよ。
+77@English will be of great use to us in future.@英語は将来私たちにとって大変役に立つでしょう。
+78@His effort proved to be in vain.@彼の努力も骨折り損であることがわかった。
+79@He is cheerful by nature, but he seems to have been in low spirits these days.@彼は生まれつき陽気な性格ですが，このところ元気がなさそうです。
+80@Fortunately the child was rescued from drowning by a student who happened to be passing.@幸い，その子供は通り掛かりの学生におぼれるところを助けられました。
+81@We have discussed the matter several times but haven't reached any conclusion yet.@私たちは数回その問題について討議しましたが，まだ何の結論にも達していません。
+82@The teacher explained to the students why the moon shows different shapes.@先生は生徒たちになぜ月が色々な形に見えるか説明した。
+83@My father looked me in the face and patted me on the shoulder.@父は僕の顔をじっと見て肩を軽くたたきました。
+84@Newspapers and magazines often go to extremes to provide their readers with unimportant statistics.@新聞や雑誌は極端に走って，重要でない統計をその読者に提供することがよくある。
+85@The development of the means of transportation has gradually deprived men of opportunities to walk.@交通機関が発達して人間は次第に歩く機会が少なくなった。
+86@Please make yourself at home and help yourself to the cake.@どうかおくつろぎになって，お菓子を召し上がって下さい。
+87@He laughed a hearty laugh and nodded his approval.@彼は心から笑って，うなずいて承諾した。
+88@I really don't know how to thank you enough. Don't mention it. Remember to call me up any time you are in rouble.@「本当にお礼の申し上げようもございません。」「どう致しまして。いつでも困ったときは必ず電話して下さい。」
+89@Did you enjoy climbing Mt. Asama the other day?  It didn't stop raining, therefore we had to give up climbing.@「先日の浅間登山は楽しかったですか。」「雨が降り止まなかったので，登山をあきらめなければなりませんでした。」
+90@They say that he is one of the most eminent physicists in the world. Do you know what his speciality is?@彼は世界で指折りの物理学者だそうです。何を専門にしているのか，あなたは御存知ですか。
+91@My aunt gave me this alarm clock for a birthday present.@叔母が誕生日の贈物にこの目覚し時計を僕にくれました。
+92@I sent her a letter of thanks by air mail.@僕は航空便で彼女にお礼状を出しました。
+93@Will you lend me your video game tomorrow morning?@明日の朝，君のテレビゲームを貸してくれませんか。
+94@I wish you many happy returns of the day!@お誕生日おめでとう。
+95@Get me a bottle of soda pop, please.@どうか僕にサイダーを１本買って下さい。
+96@Can you spare me a few minutes of your time? I wish to ask you a favor.@ちょっと時間をさいて頂けませんか。あなたにお願いしたいことがあるのですが。
+97@I don't envy him his magnificent house.@僕は彼の豪華な家をうらやましいとは思わない。
+98@The work took the boys more than six hours.@その仕事は少年たちには６時間以上かかった。
+99@He promised me never to be late again.@彼は僕に二度と遅刻しないと約束した。
+100@Mother asked me whether I would rather stay at home than go to see a movie.@母は私に，映画を見に行くより家に居たいのか，と尋ねた。
+101@They named him John after his grandfather.@彼らは祖父の名を取って彼をジョンと名付けた。
+102@He has made up his mind to do all he can to make his parents happy.@彼は両親を幸福にするために，できるだけのことをしようと決心した。
+103@Have you ever heard him speak ill of others?@彼が他人の悪口を言うのを聞いたことがありますか。
+104@I cannot make him do so against his will.@私は彼に無理にさせることはできません。
+105@Our parents expect us to do well at school.@両親は私たちが学校で良い成績を取ることを期待しています。
+106@Imagine yourself to be on a desert island.@無人島にいると想像してごらんなさい。
+107@When I took hold of his hand, I felt it trembling.@彼の手を握ると，震えているのが感じられた。
+108@I am sorry to have kept you waiting so long.@長らくお待たせしてすみません。
+109@According to today's paper, a good many people had their houses washed away by the flood.@今日の新聞によると，大勢の人がその洪水で家を流されたそうです。
+110@I had a lot of difficulty in making myself understood in French.@僕はフランス語で話を通じさせるのに大変骨が折れた。
+111@I thought it a shame to give in to her.@僕は彼女の考え通りになるのは恥だと思った。
+112@I make it a rule never to eat between meals.@僕は決して間食をしないことにしている。
+113@Your statement has made it clear that he meant no harm.@君の説明で彼に悪意がなかったことがはっきりしました。
+114@I cannot but think it strange that such a hard worker as he should fail.@彼のような勉強家が失敗するなんて，僕は不思議に思わずにはいられない。
+115@I think it doubtful whether he has any intention to marry her.@彼が彼女と結婚するつもりなのかどうか疑わしいと思う。
+116@You can count on it that he has nothing to do with the affair.@彼がその事件とは何の関係もないことは間違いありません。
+117@Please see to it that the children keep off the grass.@子供たちが芝生に入らないよう気を付けて下さい。
+118@Don't you find it unpleasant walking in the rain? I can't put up with it.@雨の中を歩くのは不愉快ではありませんか。私には耐えられない。
+119@Rumor has it that he would take part in the contest.@彼はそのコンテストに出るといううわさだ。
+120@I took it for granted that he would say what he had to say.@私は，彼が当然言い分を言うものと思っていた。
+121@How do you think the accident came about?@その事故はどのようにして起こったと思いますか。
+122@All of a sudden the light went out of itself.@突然明かりがひとりでに消えた。
+123@Needless to say, street trees add to the beauty of the city.@言うまでもなく街路樹は都市の美観を増す。
+124@I don't think my cousin takes after his grandfather.@いとこは彼の祖父に似ていないと思う。
+125@I had not gone far when I came upon an old friend of mine.@遠くまで行かないうちにばったり旧友に出会った。
+126@You've hit upon a good idea! I'm sure he will approve of it, too.@いいことを思い付いたね。彼もきっと賛成だろう。
+127@What on earth has brought about this quarrel?@一体どうしてこんなけんかになったのだ。
+128@He gave up the idea of doing the sights of the city.@彼は市内見物をする考えをあきらめた。
+129@It's nice of you to come all the way to see me off.@わざわざお見送りに来て下さって有難うございます。
+130@You must look over your examination paper before you hand it in.@答案を出す前に見直さなければなりませんよ。
+131@We should do away with this sort of superstition as soon as possible.@我々はこのような迷信をできるだけ早く捨てるべきである。
+132@We read newspapers so that we may keep up with the times.@時勢について行くために，我々は新聞を読む。
+133@I don't look up to those people because they are better off.@暮らし向きが良いからといって，僕はあの人たちを尊敬しているわけではない。
+134@I have been looking forward to going on a trip abroad.@僕はずっと外国旅行に行くのを楽しみに待っていたんです。
+135@Don't find fault with others when you are to blame.@自分の方が悪いのに，ひとに文句を言うな。
+136@I am not going to be made a fool of by you.@お前なんかに一杯食わされはしないぞ。
+137@He was the last man to take advantage of the girl's ignorance.@彼はその少女の無知に付け込むような男ではなかった。
+138@You should avail yourself of every chance to improve your English.@英語に上達するためにあらゆる機会を利用すべきです。
+139@He devoted himself to the study of Greek literature.@彼はギリシア文学の研究に専念した。
+140@She was not at all aware of the face that they were all jealous of her good fortune.@彼女は，彼らがみんな彼女の幸運をねたんでいるという事実に全然気づいていなかった。
+141@The blossoms are certainly beautiful, but strange to say, the tree bears no fruit.@なるほど花は美しいが，不思議なことにその木には実がならない。
+142@Time and tide wait for no man.@歳月人を待たず。
+143@The jury retired to their room and talked it over, but were unable to agree.@陪審員は自室にさがって協議したが，意見の一致をみることができなかった。
+144@Two hundred dollars a month is enough to live on.@一月200ドルあれば暮らすのに充分だ。
+145@Bread and butter is their usual breakfast.@バターつきパンが彼らのふだんの朝食です。
+146@There is every reason to believe that the Japanese are an industrious people.@日本人が勤勉な国民であると信じる理由はいくらでもある。
+147@All is not gold that glitters.@光るものがすべて金とは限らない。
+148@About three-fourths of the earth's surface is water and the rest is land.@地球の表面の約４分の３は水で，残りは陸である。
+149@It is a matter for regret that a number of lives are lost in traffic accidents every day.@毎日交通事故で多くの生命が失われるのは嘆かわしいことだ。
+150@Neither the president nor the professors were willing to reform the system.@学長も教授たちも制度の改革には乗り気ではなかった。
+151@Even a child knows that two and two makes four.@子供でも２足す２が４であることは知っている。
+152@Here comes the train for Osaka! Grab your suitcase.@さあ大阪行きの列車が来たよ。スーツケースを持ちなさい。
+153@The time will surely come when my words will come true, but when it actually comes I shall long be dead.@私の言葉が真実になる時がきっとやって来る。しかしその時が実際にやって来たときには，私はとっくに死んでいるだろう。
+154@She went into fits of laughter when he slipped on a banana peel.@彼がバナナの皮ですべったとき，彼女はつい吹き出してしまった。
+155@You will be able to drive after a few more lessons.@君はあと二，三回けいこをすれば，運転できるようになるでしょう。
+156@I won't let you have your own way in everything.@何でもわがままにはさせないぞ。
+157@Where shall I carry your baggage, sir?@お荷物はどこにお運びしましょうか。
+158@Excuse me, but will you please tell me the way to Buckingham Palace?@すみませんが，バッキンガム宮殿へ行く道を教えてくれませんか。
+159@Let's go to see the cherry blossoms one of these days. They will be at their best now.@いつか近日中に花見に行きましょう。花は今満開でしょう。
+160@I will call on you soon, if you will let me know your address.@私にあなたの住所をお知らせ下されば，すぐにお訪ねします。
+161@They have just loaded the truck with vegetables.@彼らはちょうどトラックに野菜を積み込んでしまったところです。
+162@A bad habit which you have once formed is difficult to get rid of.@一度ついた悪い癖は直すのが難しい。
+163@He is proud that he has never consulted a doctor in all his life.@彼は生まれてから一度も居者に診てもらったことがないのを自慢しています。
+164@I have seen nothing of him lately. Is it true that he has been in the hospital?@近頃彼にはさっぱり会いません。彼が入院しているというのは本当ですか。
+165@I've been to the grocer's just round the corner to buy a pound of butter and a dozen eggs.@僕はすぐそこの食料品店へ，バターを１ポンドと卵を１ダース買いに行ってきたところです。
+166@When you have done with the book I lent you the other day, please return it to me.@先日貸した本がお済みになりましたら返してくれませんか。
+167@When I got to the airport, I found to my regret that his plane had already taken off.@僕が空港に着いたときには，残念なことに，彼の乗った飛行機はもう飛び立ってしまっていた。
+168@Though she had been away from home only a month or so, she was very glad to be going back home to her parents.@郷里を離れてから１か月かそこらしか経っていなかったけれども，彼女は両親のものに帰るのがとてもうれしかった。
+169@The other day I ran into Mr. Tanaka, who I had not seen for ten years.@先日10年振りに田中さんにばったり会った。
+170@In two year's time my cousin will have taken a master's degree.@２年経てば僕のいとこは修士号を取っているだろう。
+171@Don't disturb him; he is watching a TV drama.@彼の邪魔をするな，テレビドラマを見ているところなんだ。
+172@I am thinking of climbing the Japan Alps next summer.@僕は来年の夏，日本アルプスに登ろうかと思っている。
+173@The Prime Minister is speaking on television tonight.@総理大臣が今夜テレビで話をする予定です。
+174@He is always reading books and doesn't exercise at all.@彼はいつも本ばかり読んでいて，何も運動をしない。
+175@If you hit a man with your car and call him a fool, you are adding insult to injury.@人に車をぶつけておいて馬鹿野郎などと言ったら，傷つけた上に侮辱することになる。
+176@She fell and broke her leg while she was skating.@彼女はスタートをしているときに，転んで足を折った。
+177@We'll be flying over the Pacific Ocean about this time tomorrow.@私たちは明日の今頃，太平洋の上空を飛んでいるでしょう。
+178@It has been raining off and on since last Wednesday. We have had enough of rain.@先週の水曜日から雨が降ったり止んだりしている。雨はもう沢山だ。
+179@I had been working for two hours when I suddenly felt sick.@２時間働いたら急に僕は気分が悪くなった。
+180@They will have been studying English five full years next April.@彼らはこの４月で英語をまる５年学ぶことになる。
+181@Dr. Schweitzer's achievements are known to the whole world.@シュヴァイツァー博士の業績は世界中の人びとに知れわたっています。
+182@a) It is believed that the English are conservative. b) The English are believed to be conservative.@イギリス人は保守的であると信じられている。
+183@The poor girl was made to do all the dirty work, dressed in rags.@かわいそうなその少女は，ぼろをまとってあらゆる汚い仕事をさせられた。
+184@He was elected chairman by all the members of the committee.@彼は委員全員によって委員長に選ばれた。
+185@The summit conference is supposed to be held in a city known for its scenic beauty every other year.@首脳会議は，風光明媚で知られている都市で，１年おきに開催されることになっている。
+186@I had been kept waiting about an hour before he turned up.@１時間ほど待たされてからやっと彼が姿を現わした。
+187@On our way home from museum, we were caught in a shower and drenched to the skin.@博物館から帰る途中，我々はにわか雨に遭ってずぶぬれになった。
+188@The growing shortages of raw materials must be dealt with by scientists at an international level.@ますますひどくなってゆく原料不足には科学者たちが国際的レベルで取り組まなければならない。
+189@The conflict between the two countries must be put an end to by all means.@その２国間の争いは，どうしても止めさせなければならない。
+190@I am very surprised to hear that yesterday he was run over by a car and was badly injured.@彼が昨日，自転車にひかれて大けがをしたと聞いて，私はとても驚いている。
+191@I tried to dissuade her from marrying him somehow or other, but she would not listen to me.@何とかして彼女に彼との結婚を思いとどまらせようとしたのだが，彼女は僕の言うことに耳を貸そうとはしなかった。
+192@Is there anyone who would lose his freedom of speech?@言論の自由を失いたいと思う者がいるだろうか。
+193@I would often go cycling into the country in my high school days.@僕は高校時代によく田舎へサイクリングに出かけたものだった。
+194@I would like to talk over the matter with you later.@いずれその件について御相談したいと思います。
+195@You should have come to the part yesterday. We had a very good time.@昨日パーティーに来ればよかったのに。とても楽しかった。
+196@You ought to know better than to quarrel over such a trifle.@そんなつまらないことで口論するなんて，お前も分別がないよ。
+197@She cannot have stolen the money, for she was always saying that she would rather starve than steal.@彼女がその金を盗んだはずはない。盗みをするくらいなら餓死した方がましだといつも言っていたんだから。
+198@You cannot be too careful in translating English.@英語を訳すに当たってはいくら注意してもしすぎることはない。
+199@Seeing that she was not in the least excited at the death of her husband, she must have been prepared for the worst.@彼女が夫の死を聞いて少しも慌てなかったのをみると，万一の覚悟はしていたに違いない。
+200@You have only to confess and ask his pardon. I am sure he will gladly forgive your fault.@君は事実を言ってあの人の許しを乞えばそれでよいのだ。あの人はきっと喜んで君の過ちを許すだろうと思う。
+201@It may begin to rain at any moment, so I think you had better give up your plan of mountain climbing.@いつ何どき雨が降り始めるかも知れないから，君たちは山登りの計画はあきらめた方がよいと僕は思う。
+202@The editor may have meant what he said.@編集長は本気で言ったのかも知れない。
+203@You may well say so, but just make inquiries about the matter. I dare say there is a mistake of some sort on your part.@君がそう言うのももっともだが，まあその件を調べてみたまえ。何か君の方の思い違いかも知れないから。
+204@You may as well send the letter registered.@その手紙は書留で出した方がよい。
+205@You might as well throw your money into the sea as lend it to him.@彼に金を貸すのは金を海に捨てるようなものだ。
+206@How dare you say such a thing before your seniors?@君は先輩たちの前でよくもそんなことが言えるものだ。
+207@You needn't have ordered the book from the M. Bookstore.@君はＭ書店にその本を注文する必要はなかったのに。
+208@There used to be a park near our house, but it was recently made into a parking lot.@もと私たちの家の近くに公園があったが，最近それが駐車場になった。
+209@An old friend of mine was to arrive at Tokyo Station at six that morning and I was going to meet him at the station.@その朝，旧友が東京駅に６時に着くことになっていて，私は彼を駅まで出迎えるつもりだった。
+210@Not a soul was to be seen in the street.@通りには人っ子一人見えなかった。
+211@If you have a chance of going abroad at an early age, you will be able to obtain a broader view of life.@若い頃に外国へ行く機会があれば，世の中を見る目も広くなるだろう。
+212@If I were in your place, I would flatly refuse his offer.@もし僕が君の立場だったら，彼の申し出をきっぱり断るだろう。
+213@If they had turned down his request, he would have been at his wits' end.@もし彼らが彼の頼みを断っていたら，彼は途方にくれていたであろう。
+214@If anyone should come during your absence, what shall I say to him?@もしあなたの留守中に誰か来たら，どう言いましょうか。
+215@If you were to emigrate, which part of the world would you prefer to go to, and what you be involved in?@もし君が移民するとしたら，世界のどこへ行って，何に従事しますか。
+216@Had Japan not adopted the essentials of Western Civilization, she would not be recognized as one of the Great Powers of the world and is today.@日本が西洋文明の精髄を取り入れなかったら，今日のように世界の列強の一つとして認められてないであろう。
+217@If it had not been for your financial support, I should have failed in the Enterprise.@あなたの財政的援助がなかったら，私は事業に失敗していただろう。
+218@But for Chinese influences, Japanese culture would not be what it is today.@中国の影響がなかったら，日本の文化は今日のようにはならなかったであろう。
+219@The same thing, happening in wartime, might have amounted to a serious disaster.@同じことが，戦争中に起こっていたら，ひどい災害になっていたかもしれない。
+220@A nuclear war would put an end to the human race.@核戦争が起これば，人類は絶滅するだろう。
+221@Would you mind if I opened the window? I'd rather you didn't. I have a slight cold.@「窓をあけてもさしつかえないでしょうか。」「御遠慮願えませんか。ちょっと風邪をひいていますので。」
+222@You might have written to me once in a while.@時には手紙くらいくれたってよかったのに。
+223@How much I wish I had a microcomputer! Then what a useful time I could have every day!@マイコンがあったらなあ。毎日時間が有効に使えるのになあ。
+224@He wishes the company had shown some appreciation of his service.@会社が彼の功に何か感謝の意を表していたらなあと彼は思っていた。
+225@I feel as if my head were splitting.@まるで頭が割れそうだ。
+226@You look as though you had seen a ghost. Is there anything wrong?@君はまるで幽霊に出会ったような顔色だ。どうかしたのか。
+227@What did the radio weather forecast say? As we have had a long spell of drought, it's about time we had some rain.@ラジオの天気予報はどうでしたか。長い日照り続きの挙げ句だから，もう雨があってもよい頃だ。
+228@God save our gracious Queen!@神がいつくしみ深い我らの女王をお助け下さいますように。（女王万歳！）
+229@Come what may, we must not lose courage.@何事が起ころうとも，我々は勇気を失ってはならぬ。
+230@The newspaper is, as it were, the mirror of society. We can see all daily events reflected in it.@新聞は言わば社会の鏡である。日々の出来事は全部それに映って見える。
+231@To read a foreign language is one thing; to speak it is another.@外国語を読むことと，それを話すことは別だ。
+232@Her voice was so sweet that sailors were fascinated and forgot to steer their boats.@彼女の声は大変美しかったので船乗りたちはうっとりして船のかじをとるのを忘れた。
+233@Parting from my friend, I was at a loss which way to go or what to do.@友人と別れて，僕はどちらへ行けばよいのか，またどうしたらよいのか途方にくれた。
+234@All you have to do is to keep you early hours.@君は早寝早起きしさえすればよい。
+235@I advised him not to be late for school so often.@僕は彼にそんなに度々学校に遅刻しないように忠告してやりました。
+236@He was the first to get into the taxi.@彼が最初にそのタクシーに乗った。
+237@There is no time to lose. Hurry up.@一刻も猶予はできぬ。急げ。
+238@He had the audacity to apply for the position a second time.@彼はあつかましくも，もう一度その職に志願した。
+239@I want a Swiss-made watch, but I have no money to buy one with.@僕はスイス製の時計が欲しいのだが買う金がない。
+240@His small capital formed a useful basis on which to build a fortune.@わずかの資本が彼が財産を作るのに有効な基礎となった。
+241@I listened attentively to the announcement so as not to miss a single word.@僕は一言も聞き逃さないように，注意深くその発表に耳を傾けた。
+242@The drunken man awoke to find himself in prison.@その酔っ払いは目が覚めてみると監獄に入れられていた。
+243@He survived the crash only to die in the desert.@彼は（飛行機の）墜落では死を免れたが，結局は砂漠で死んだ。
+244@She burst out crying to hear the news of her son's death.@彼女は息子が死んだという知らせを聞いてわっと泣き出した。
+245@What a fool I was to be unaware of a picture of my own painting!@自分の描いた絵に気付かないとは，僕は何という馬鹿だったのだろう。
+246@To hear him talk, one would think he was out of his hand.@彼が話すのを聞いたら，人は気が変だと思うだろう。
+247@He is quick to understand but slow to make up his mind.@彼は理解が速いが決心するのが遅い。
+248@Whether he had something to do with the case or not is not easy to answer.@彼がその事件と関係があったか否かは，容易に答えられない。
+249@A neighbor was kind enough to drive me to the station.@近所の人が親切にも駅まで車で送ってくれた。
+250@Mt. Fuji, as seen from Lake Shoji, was a sight too wonderful to describe.@精進湖から見た富士山は言いようのないほどすばらしい光景でした。
+251@To do him justice, he is not so impudent as to ignore his master's instructions.@公平に言えば，彼は主人の指図を無視するほどずうずうしくはありません。
+252@We cannot afford a car, not to mention the fact that we have no garage.@車庫のないのは別として，うちでは自動車なんか買えない。
+253@How did you come to be acquainted with the poet?@君はどういういきさつでその詩人と知り合いになったのですか。
+254@For production to be increased we must have efficient organization.@生産を増すためには，われわれは能率的な機構を持たねばならない。
+255@I'm sorry if I hurt your feelings; I didn't mean to.@もしあなたの感情を害したのでしたらすみません。そんなつもりではなかったのです。
+256@The house seems to have been left vacant for a long time.@その家は長い間空家のままであったらしい。
+257@The woman is said to have been an actress in her twenties.@その婦人は20歳台には女優であったらしい。
+258@I had intended to stay with my relatives for the night.@僕はその夜は親戚のところに泊まるつもりであったのだが。
+259@She did not let her children go to the river, which she thought to be dangerous to swim in.@彼女は子供たちを川に行かせなかった。川で泳ぐのは危険であると彼女は考えていたのであった。
+260@He was so intent on his book that he did not hear me come in.@彼は読書に没頭していたので，私が中に入る音も耳に入らなかった。
+261@The following picture shows a group of children watching a baseball game on television.@次の絵はテレビで野球の試合を見ている一団の子供たちの絵です。
+262@I sent him a telegram saying that his father had taken a sudden turn for the worse.@僕は彼に，彼の父親の容体が急に悪化したという電報を打ちました。
+263@His newly-built house is situated on a small hill commanding a fine view of small islands surrounded by the blue sea.@彼の新築の家は，青い海に囲まれた小島の見える眺めがすばらしい小さな丘の上にあります。
+264@This mechanical pencil is a souvenir from a friend just returned from abroad.@このシャープペンシルは海外から帰ったばかりの友人のおみやげです。
+265@Let's go fishing in the pond tomorrow morning, shall we?@明日の朝，池へ釣りに行かないか。
+266@In less than ten minutes the boy came running for his life.@10分もたたないうちにその少年が懸命に走ってきた。
+267@To be brief, she felt hurt at his criticism.@簡単に言えば彼女は彼の批評に感情を害したのだった。
+268@Far away to the west we saw the serene figure of Mt.Fuji rising above the clouds.@西の方はるか遠くに富士の壮麗な姿が雲の上にそびえているのが見えた。
+269@Since he is still in a critical condition, you would do better to leave it unsaid.@彼はまだ重体だから，それは言わないでおく方がいいだろう。
+270@I caught him stealing fruit from our orchaid.@私は彼が私たちの果樹園から果物を盗んでいるところを見つけた。
+271@Having finished his breakfast in haste, he ran to the bus stop.@急いで朝食を食べ終わると，彼はバスの停留所へ走っていった。
+272@Being unable to support himself, he turned to his father for help.@自活できないので，彼は父親に援助を求めた。
+273@Not knowing what to say, I remained silent all through the meeting.@何と言ってよいかわからなかったので，僕は会の間ずっと黙っていた。
+274@He is leading a simple life now, deprived of his power and wealth.@権力も富も奪われて，彼は今や質素な生活を送っている。
+275@Turning to the left crossing, you wil find a five-storied building on the right.@二つ目の交差点で左へ曲がると，右側に５階建ての建物があります。
+276@Admitting his lack of experience, I still think he should have done better.@経験の足りないのは認めるが，それでもやはり彼はもっとうまくやってしかるべきだったと思う。
+277@Night coming on, they stopped chatting and went back to their respective rooms.@夜が訪れたので，彼女らはおしゃべりを止めて，各自の部屋へ帰った。
+278@All things considered, it is not such a good bargain.@あらゆることを考慮すると，それはあまり得な買物ではない。
+279@Generally speaking, there are a considerable number of Europeans who are familiar with ancient Oriental culture.@一般的に言って，古代の東洋の文化をよく知っているヨーロッパ人はかなり多くいる。
+280@He sat with his arms folded and seemed lost in thought.@彼は腕を組んで座っていて，物思いにふけっているようであった。
+281@Seeing is believing goes an English proverb.@「百聞は一見にしかず」とフランスの諺にある。
+282@When I begin learning English, what troubled me most was the article.@僕が英語を習いはじめた頃，最も困ったのは冠詞であった。
+283@He tried hard to get rid of the habit of sleeping late in the morning, but in vain.@彼は朝寝坊の癖を直そうと大いに努めたが駄目だった。
+284@Instead of sending somebody on your behalf, I think you had better go and speak in person.@代理人をやる代わりに，あなたが御自身で行ってお話しになる方がいいでしょう。
+285@The boy is ashamed of having made such a careless mistake.@少年はそんな不注意な間違いをしたのを恥じている。
+286@She was worried over her little son's having to travel all alone.@彼女はまだ小さな自分の息子がひとり旅をしなければならないことが心配であった。
+287@On hearing that news, the patrol boat hurried to the scene of disaster.@その知らせを聞くと巡視船は直ちに遭難現場に急行した。
+288@I have never heard Kamakura mentioned without being reminded of that great Budda.@その時以来，鎌倉と聞くと僕はいつもあの大仏を思い出す。
+289@When we take a walk in the field on a warm day, we feel like thanking nature.@暖かい日に野原を散歩すると，自然に対して感謝したくなります。
+290@What about coming round to my house to look at my photograph album? I don't mind if I do.@「僕の家へ来てアルバムでも見たらどうですか。」「それも悪くないですね。」
+291@We don't have to ask my dad for his car any more when we go out on a date.@僕たちはもう，デートに出掛けるとき父さんに車を貸してと頼まなくても済む。
+292@I talked about it without reserve. I did so for his good.@私はそのことについて包み隠さず話した。彼のためを思ってそうしたのだ。
+293@In short, what has been said concerning its domestic economy is true of the foreign policies.@要するに，その国の国内経済について述べたことは対外政策にも当てはまる。
+294@I am for the proposal but he is against it.@僕はその提案に賛成なのだが，彼は反対している。
+295@The superexpress trains on the New Tokaido Line are well air-conditioned, besides being spacious and confortable to ride in.@東海道新幹線の超特急は，広くて乗り心地がよい上に，冷暖房がよくきいている。
+296@Threre is no sense in buying expensive clothes for children, as they soon grow out of them.@子どもたちに高価な服を買ってやっても意味がない。すぐに小さくなるのだから。
+297@A man came out from behind the curtain and grouped his way through the darkness of the room.@カーテンの後から一人の男が出てきて部屋の暗やみの中を手探りして進んで行った。
+298@Men differ from brutes in that they can think and speak.@人間は考え話すことができる点で，獣とは異なる。
+299@I will call at your house on Friday afternoon with Mr. Ito, whom I spoke to you on the train.@列車の中であなたにお話した伊藤さんといっしょに金曜日の午後お宅へ伺います。
+300@The lawyer she reffered to in her talk lives within a stone's throw of my house.@彼女の話の中に出た弁護士は私の家のすぐ近くに住んでいます。
+301@The parking lot was empty except for that huge track.@駐車場はその巨大なトラックのほかは一台も車はなかった。
+302@To the best of my knowledge, he thinks of everything in terms of money.@僕の知る限りでは，彼は何でも金銭に結びつけて考える。
+303@Let me say a few words by a way of suggestion.@提案として一言二言言わせて下さい。
+304@He took every possible step to get on in life at the cost of his health.@彼は出世するために，健康を害してまでもありとあらゆる手段を取った。
+305@The ship was at the mercy of a mountain of a wave and the crew were face to face with death.@船は山のような波のなすがままになり，乗組員たちは死に直面していた。
+306@I hope Mother is in a good mood, or she will be angry with me for coming home late.@お母さんの機嫌が良ければいゝのだが。でないと遅く帰ったことで私を怒るだろう。
+307@She has no eye for jewels ; she can't tell the real from the false.@彼女は宝石を見る目がない。本物と偽物の区別もつかないのだ。
+308@Between ourselves, he was far from being happy.@ここだけの話だが，サムは父親から独立したがっているんだ。
+309@With all his wealth, he was far from being happy.@そんなに財産がありながら，彼は決して幸福ではなかった。
+310@What a pity that he, of all men, should fall a victim to a fatal disease!@よりによって彼が不治の病にかかるとは何という残念な事だ。
+311@Those who visit Niagara Falls are sure to be suprised at their magnitude.@ナイアガラの滝訪れる人たちは必ずその壮大さに驚く。
+312@He mentioned the book whose title has slipped my memory.@私がその題名を失念してしまった本のことを彼は話に出した。
+313@Botchan' is based on the experiences which the author had while teaching in a certain middle school in Shikoku.@「坊っちゃん」は作者が四国のある中学で教師をしていた頃の経験に基づいている。
+314@Soseki Natsume is an author who I greatly admire. He is one of the greatest writers that Japan has ever produced.@夏目漱石は私の大いに崇拝する作家です。彼は日本が生んだ最も偉大な作家の一人です。
+315@Who that has pride can stand such an insult.@誇りを持った人間なら，誰がそのような侮辱に耐えられようか。
+316@She is not the woman that she used to be.@彼女は昔の彼女ではない。
+317@I was annoyed at the abrupt way in which she left us.@彼女がだしぬけに立ち去ったのに私は腹を立てた。
+318@What struck me particularly was the ease with which he got through the work.@特に感銘の深かったのは，彼がその仕事をいかにもやすやすとやってのけたことであった。
+319@There was nothing he liked better than reading and traveling, which added a good deal to his stock of knowledge.@読書と旅行ほど彼の好きなものはなかったが，これが彼の知識を大いに豊かにしたのであった。
+320@In due course he graduated from the college with honors, and what was better still, he was offered the very job he had long wanted.@やがて彼は大学を優等で卒業したが，それにも増していいことには，かねてから希望していた職についた。
+321@His wife, who is French, can speak English better than he does.@彼の奥さんはフランス人だが，彼より英語が上手だ。
+322@The game ended in a victory for School B, by a score of 5 to 2, which was quite a surprise to us.@試合は５対７のスコアでB校の勝利に終わったが，番狂わせであった。
+323@I saw among the crowd a man who I thought was your brother.@僕は群衆の中に君の兄さんだと思う人を見かけました。
+324@Will you recommend a reference book I can read easily which is rich in contents?@簡単に読めて内容が豊富な参考書を推薦してくれませんか。
+325@Even as a child he would often amaze grown-up people with his unusual ability. He seems to have been what you call an infant genius.@彼は子供の頃でも，その非凡な才能によって大人たちをしばしば驚かせた。いわゆる神童であったらしい。
+326@Reading is to the mind what food is to the body.@読書と精神の関係は，食物と肉体の関係と同じである。
+327@Read such books as make you the wiser for reading them.@読んだらそれだけ賢くなるような本を読みなさい。
+328@You are going through the same trial as I did years ago.@君たちは今，私が何年も前に経験したのと同じ試練を経験しているのだ。
+329@As is the often the case, the streetcar I took this morning was awfully crowded.@いつものことだが，今朝の電車は恐ろしく混んでいた。
+330@There is no rule but has some exceptions.@例外のない規則はない。
+331@The doctor told him to take a few days' rest, which he followed.@医者は彼に二，三日休養を取るように言った。そして彼はその忠告に従った。
+332@He used what little money he had saved to tide over the crisis.@彼はその危機を乗り越えるために，貯えていたわずかな金を全部使った。
+333@The time will soon come when we can enjoy space travel.@宇宙旅行を楽しむことのできる時がやがて来るでしょう。
+334@There are some cases where honesty does not pay.@正直者が馬鹿を見ることもある。
+335@The only reason that I paint is that I can't help it.@私が絵を書く唯一の理由は，描かずにはいられないからです。
+336@She was just going to tell me more, when her father charged into the apartment, scarlet with anger.@彼女が私にもっと話そうとしたちょうどその時，彼女の父が真っ赤になって怒りながらその部屋に飛び込んできた。
+337@Finally he went to Boston, where he settled down for the rest of his life.@最後に彼はボストンに行き，そこに定住して余生を送った。
+338@I'd like to have completed my graduation thesis somehow by the time the vacations comes to an end.@休暇が終わるまでに，なんとか卒論を仕上げてしまいたい。
+339@The fates seldom give us what we want in the way we want it.@運命の女神が，我々の望むものを，望ましい思う仕方で与えてくれることはまずない。
+340@He is masculine and very considerate. That's why I like him.@あの人は男らしくてとても思いやりがあるのです。それで私はあの人が好きなのです。
+341@He would not listen whoever opposed him.@彼は誰でも自分に反対する人に耳を貸そうとしなかった。
+342@Whichever of you comes in first will receive the prize.@君たちのうちどちらでも最初にゴールインしたものが賞をもらうことになる。
+343@He suceeds in whatever he undertakes ; for he is not only industrious but also careful.@彼は何を企てても成功する。というのも勤勉であるばかりでなく注意深いからである。
+344@You may use this money for whatever purpose you choose.@君は何でも好きな目的にこの金を使ってよい。
+345@You can come whenever it is convinient to you.@いつでも都合のいいときに来ていいよ。
+346@Whomever she spoke to, she was invariably polite.@彼女は誰と話しても，いつも礼儀正しかった。
+347@Whichever way we may look, we see nothing but mountains.@どちらを見ても山ばかりだ。
+348@Whatever business you may be engaged in, you cannot hope for success unless you apply yourself to it heart and soul.@どんな職業に従事しても，一生懸命にそれをしなければ成功は望めません。
+349@Wherever we may go in the city, we find large buildings under construction, and the cars driving about have remarkably increased in number.@その市では至る所で大きな建物が建築中ですし，走り回っている自動車の数もめっきり増えてきました。
+350@However hard we tried, we could not keep the fire from spreading.@いくらやってみても，我々は火が広がるのを防ぐことはできなかった。
+351@Night had completely fallen before we ware aware of it.@いつの間にかすっかり夜になっていた。
+352@As we drove on, the sound of music died gradually away until we could no longer hear it.@車を走らせてゆくにつれて，音楽は次第に音が小さくなってついにはもはや聞こえなくなった。
+353@People do not know the blessing of health till they lose it.@人は健康を失って初めてその有り難みがわかる。
+354@The first time I saw him, I did not think that there was in him anything out of the ordinary.@はじめて彼に会ったとき，別に普通の人と変わっているところがあるとは思わなかった。
+355@The child burst into tears the moment he saw his mother enter the room.@子供は母親が部屋に入ってくるのを見たとたん，わっと泣き出した。
+356@Immediately he put down the receiver with a sigh of relief, the telephone rang again.@彼がほっとして受話器を置いたら，すぐにまた電話が鳴った。
+357@He had hardly taken a few bites when he complained of a stomachake.@彼は二口か，三口食べるか食べないうちに，腹痛を訟えた。
+358@No sooner had I ran into the classroom barely in time.@校門に入るのと同時にベルが鳴っているのが聞こえた。教室に駆け込んでやっとのことで間に合った。
+359@While hot, iron can be beaten into almost any shape, but once cooled down, it becomes inflexible.@熱い間は，鉄は叩いてほとんどどんな形にもすることができるが，いったん冷えてしまうと曲がらなくなる。
+360@He makes a point of putting everything back where it was.@彼は何でも，元あった所に返しておくことにしている。
+361@Unless we develop other sources of energy, our entire way of life will change to a shoking extent.@他のエネルギー源を開発しなければ，我々の全生活様式はひどく変化するであろう。
+362@In case he arrives before I get back, never fail to contact me.@私が帰ってくるまでに彼が到着した場合には，必ず私に連絡してくれ。
+363@As long as I live, I shall never forget the deep emotion I felt that day.@僕はあの日の感激を生涯忘れないでしょう。
+364@So far as I am concerned, I have no objection to explaining the plan in detail.@私に関する限り，その計画を詳しく説明するのに異議はありません。
+365@Not a day passes but traffic accidents are reported.@一日として交通事故が報道されない日はない。
+366@Though she is a poor sailer, she is very fond of traveling.@彼女は船に酔いやすいのだが，旅行が大変好きだ。
+367@A man who is honest and hardworking is sure to win in the long run, if he shoes no sign of remarkable progress for the present.@正直勤勉に働く人は，たとえすぐには目覚ましい進歩は示さなくても，終わりには勝利を収めるものだ。
+368@Poor as he was, he was above such meanness.@彼は貧乏ではあったが，そんな卑劣なことをするような男ではなかった。
+369@Whether rich or poor, talented or oridinary, every individual is worthy of existence.@金持ちだろうと貧乏人だろうと，オ能があろうが平凡な人間だろうが，人間ひとりひとりが存在する価値がある。
+370@No matter where he went, he was warmly welcomed, surrounded by the people who were anxious to get a glimpse of this famous astronaut.@彼はどこへ行っても，この有名な宇宙飛行士を一目見ようとする人たちに取り囲まれて歓迎された。
+371@He always lives a frugal life, and saves as much as he can so he may have something to live on even when he is out of work.@彼は常に質素な生活をし，職を離れてもなお暮らしてゆくだけの資力があるように，できるだけ貯蓄をします。
+372@School was closed early in order that the children could go home ahead of typhoon.@子どもたちが台風が来ないうちに帰れるように学校は早目に休校になった。
+373@A notice has been put up on the platform lest the passengers should take the wrong traing in changing carriages.@乗客が乗り換えをするときに列車を間違えないように，プラットホームに掲示が設けられた。
+374@He made no comment on it for fear he should be misunderstood.@誤解されないように，彼はそのことは何も論評しなかった。
+375@He was so startled words failed him for a while.@彼は非常に驚いたのでしばらく物も言えなかった。
+376@Happiness is not so uncommon and rare that all search for it is vain.@幸福はいくら探し求めても無駄なほど珍しくまれなものではない。
+377@Japanese students of English are apt to pay too much importance to individual words, so much so that they often fail to grasp the meaning of the sentence as a whole.@英語を勉強する日本の学生は，個々の言葉にあまり重きを置きすぎる傾向があるため，かえって文章全体としての意味をつかみ得ない。
+378@This is such a good reference book that students of English cannot very well do without it.@これは非常によい参考書で，英語を勉強する人には無くてはならないものだ。
+379@His salary was small, so that he had to buy even his clothes on credit.@彼の給料は安かった。それで服さえも月賦で買わなければならなかった。
+380@No man is so bad but he may have some redeeming points.@だれにでも何か取り柄があるものだ。
+381@As he was lacking in sincerity, he was not respected for all his learning.@彼は誠実さに欠けるところがあったので，あれだけ学問があったにもかかわらず尊敬されなかった。
+382@He must have studied very hard since he has distinguished himself in the examination.@彼が試験に抜群の成績を示したからには，大いに勉強したに相違ない。
+383@We must not look down upon a country merely because it is under-developed.@われわれは，開発が遅れているからといってその国を軽んじてはいけない。
+384@He is ill spoken of partly because he is lazy, but chiefly because he is arrogant.@彼が評判が悪いのは一つには怠け者だからであるが，主に横柄だからです。
+385@Now you have come of age, you must try to earn your own living.@お前も成年に達したからには，自活するようにしなければならない。
+386@If there be any in this assembly, any dear friend of Caesar's, to him I say, that Brutus' love to Caeser was no less than his. If then that friend demand why Brutus rose against Caeser, this is my answer: Not that I loved Caeser less, but that I loved Rome more.@もしこの会衆の中に，だれか一人，シーザーの親友が居られるなら，その人に向かって言おう。シーザーに対するブルータスの友情はその人に劣らなかったと。しからば何故にブルータスはシーザーに刃向かったかと，その友人が詰問するなら我が輩はこう答えよう。それは我が輩のシーザーを愛することが薄かったためではなく，ローマを愛することが厚かったためであると。
+387@AU@己の欲するところを人に施せ。
+388@AU@生まれながらの芸術家がいるのと同じように，生まれながらのスポーツマンもいる。
+389@AU@彼女の言葉を書き留めておけばよかったのにと思った。ところが実際はそうしていなかったので，私は記億に頼って話さねばならなかった。
+390@AU@人々はまるで障害物競走をしているかのように，廊下を急ぎ足で右往左往し続けていた。
+391@AU@水が汚染されたのは由々しい問題である。
+392@AU@困ったことには僕の部屋は夜になってもあまり涼しくならない。
+393@AU@彼が無事救助されたとの知らせを聞いたときの興奮はあなたがたにはほとんど想像もできないでしょう。
+394@AU@家が学校から遠かったために，勉強する暇がろくになかったということ以外には，私の子供時代について言うべきことはほとんどありません。
+395@AU@彼が無罪放免になることは全く疑いがない。
+396@AU@彼の考えが聞く値打ちのあるものかどうか，僕にははっきりとはわかりません。
+397@AU@日本人の平均寿命が75歳を超えるか否かについては議論の余地はありません。
+398@AU@アメリカ人ではない大抵の西洋人は，アメリカ人ですかと尋ねたらそれを侮辱と受け取るだろう。
+399@AU@そんな振る舞いをするとは君がどういうつもりなのか僕には分からない。
+400@AU@彼の立っている所からは雲海のほかは何も見えなかった。
+401@AU@早寝早起きは人を健康で金持ちで賢くする。
+402@AU@菓子は食べたらなくなるもの。
+403@AU@もうひとこと言ったら彼はかんしゃくを起こすだろう。
+404@AU@彼の論文は悪くはなかったが，我々の期待ほどではなかった。
+405@AU@彼は特定の読者層ではなく，一般の男女を念頭に置いているのだ。
+406@AU@なるほど昔の陸路の旅は退屈ではあったが，比較的安全であった。
+407@AU@ウィンドー・ショッピング，つまり店のウィンドーの中の品物をただ眺めるだけのこと，これを暇つぶしにやる人がたくさんいる。
+408@AU@黙れ，さもないと追い出すぞ。
+409@AU@あたり一帯は乾ききっていて，それに雨の気配もなかった。
+410@AU@彼は彼女を深く愛していたに違いない，というのは彼女のために自分の身を犠牲にしたのだから。
+411@AU@学問でもスポーツでも，彼のクラスには彼にかなう者はない。
+412@AU@彼は学識が深いばかりでなく経験も広いので，私たちは彼を尊敬しています。
+413@AU@たいていの人は富だけでなく，地位の向上も望んでいます。
+414@AU@君の決心に固執すれば，自分の身を滅ぼすか，友人の信頼を失うかのどちらかだ。
+415@AU@彼は川の一番深いところで立ち往生した。進むことも退くこともできなかった。
+416@AU@ほかに10人の人がその職に応募したので，私がその職に就ける見込みは余りないと思う。
+417@AU@その本は役立ちそうだが，ただ残念なことに値段がちょっと高い。
+418@AU@彼に無理やり承諾させようと思えば容易にできたのだが，私はそんな手段は取りたくなかった。
+419@AU@彼は穏やかだが奇妙にせんさくするような目付きで，しばらく私を眺めた。
+420@AU@しかしやっぱり彼にも人に言えぬ秘密が一つあった，いや二つあったと言えよう。
+421@AU@人の身長は中指の長さの約20倍である。
+422@AU@英国の気候は日本ほど温和ではないが，夏は英国のほうが日本よりはるかに涼しい。
+423@AU@彼は今までにないくらい，普通の意味で野心のない人だった。
+424@AU@それは私がそれまでにしなければならなかった仕事のうちで，一番嫌な仕事であった。
+425@AU@彼は10行で10箇所のつづりの間違いをしている。
+426@AU@彼は批評家というよりもむしろジャーナリストだ。
+427@AU@彼は機嫌の悪いときは僕に口も利かない。
+428@AU@翌朝１番の列車に乗り遅れないように，その晩僕はいつもよりずっと早く床に就いた。
+429@AU@彼女の字は達筆というよりきちんとしている。
+430@AU@彼は体力にかけては僕より優れているが，経験においてははるかに劣っている。
+431@AU@秋が深まるにつれて日がだんだん短くなり，そして日ごとに寒くなります。
+432@AU@そこでは世界のどの国よりも大規模に農業が営まれている。
+433@AU@時間ほど貴重なものはない。それなのに時間ほど大切にされないものはない。
+434@AU@僕は他人に頼るのは好きではない。まして君のような人はなおさらだ。
+435@AU@彼女は娘の演奏に満足したどころではなかった。
+436@AU@鯨が魚でないのは馬が魚でないのと同じである。鯨は馬と同じく哺乳動物である。
+437@AU@与党は野党以上にはその法案に反対ではなかった。
+438@AU@光は新鮮な空気に勝るとも劣らず健康に必要である。
+439@AU@彼はその実例を六つしか知らない。彼はその実例を六つも知っている。彼はその実例をせいぜい六つしか知らない。彼はその実例を少なくとも六つは知っている。
+440@AU@彼がわいろを取ったというのはうわさにすぎない。
+441@AU@金と銀では前者の方が貴重である。
+442@AU@欠点があるから，なおさら私は彼が好きだ。
+443@AU@彼は自負心の強い人で他人から援助を受けることはなかったとはいえ，それでもその人たちの好意にはやはり感謝していた。
+444@AU@人は学問を積めば積むほど慎み深くなるのが普通だ。
+445@AU@第二次世界大戦はこれまでに起こったうちで群を抜いて破壊的なものであった。
+446@AU@台風は真夜中が最も激しかった。
+447@AU@勤勉は青少年の道徳的性格に極めて健全な影響を与える。
+448@AU@どんなに頭のよい人でも何でも知っているわけではない。
+449@AU@僕はアメリカ第２の都市でばったり彼に出くわそうとは少しも思っていなかった。
+450@AU@今朝の地震は20年振りの激しい地震でした。
+451@AU@その行商人はあまり教育はなかったが，決して馬鹿などではなかった。
+452@AU@これらの偏見の多くは，無意識に積み重ねられてきた誤解であることがわかる。
+453@AU@彼ら全員が週末に家へ帰りたがっていたわけではなかった。彼らはだれも週末に家へ帰りたがっていなかった。
+454@AU@買った本を一冊残らず読むことはできないとぼくは思う。
+455@AU@寮母さんは味方だと私が思っていたのはまんざら間違いではなかった。
+456@AU@その気の毒な老人はめったに外出しないし，訪問者もほとんどない。
+457@AU@彼の邸宅が一月もたたないうちに全焼してしまおうとは僕は夢にも思わなかった。
+458@AU@私たちの心を磨く手段としての文学の価値はいくら強調してもし過ぎることはない。
+459@AU@彼女はほかでもなく私の妻だが，困ったことに料理ときたらからっきし駄目なのだ。
+460@AU@「その手術は危険はないのですか。」「そうとは言えないと思う。」
+461@AU@「その結果に満足していないのですか。」「いいえ，満足しています。」
+462@AU@君は新出語を辞書で引けるだろう。それなのに辞書を引かなかったのだね。
+463@AU@ブラウンさんのためにパーティーを開いたらどうだろう。
+464@AU@アイスコーヒーと（アイス）クリームソーダとどちらになさいますか。
+465@AU@花嫁はどちらの出身だと思いますか。
+466@AU@どうしてこの間の日曜日に遊びに来なかったんだ。
+467@AU@エチオピア人が皮膚の色を変え，豹がその斑点を変えることができるだろうか。（旧約エレミヤ書 13章23節）
+468@AU@神経質になるな。ただ自分のペースを守れ。
+469@AU@なんと面白いんだろう。僕にもやらせてくれ。
+470@AU@これはなんとかわいい花なんだろう。そして何といいにおいなんだろう。
+471@AU@彼は私に，「これは我々の古い習慣なのだ。」と言った。
+472@AU@医者は私たちに，「あなたがたのお母さんの容体が急変するとは思いません。」と言った。
+473@AU@彼女は，「私はむしろ息子たちが釈放されるようお願いしたい。」と言った。
+474@AU@彼らは彼に，「君は自分自身のためにそれをしたのか。」と言った。
+475@AU@私は彼に，「あすの朝何時にここを立つのですか。」と言った。
+476@AU@彼は彼女に，「鏡で自分を見てみなさい。」と言った。
+477@AU@彼女は言った。「子どもたち，どうか騒がないでおくれ。赤ちゃんが今眠っているんだから。」と言った。
+478@AU@彼は言った。「ああ，僕は何と馬鹿だったのだろう。」
+479@AU@彼女は言った。「このかわいそうな子に神様の御加護がありますように。」
+480@AU@気晴らしにどこかへ行ってはどうかと彼に言いましたら，そうしたいが忙しくて駄目だとのことでした。
+481@AU@村人たちがみんな彼を尊敬するのは彼の知恵のためではなく，彼が意志の人だからである。
+482@AU@彼が他の人と仲良くやってゆくのが難しいのは，他でもなく彼の頭が切れるためである。
+483@AU@私は今はあまり運動をしませんが，もっと若い頃はずいぶんフットボールをしました。
+484@AU@どうしてその事故が起きたのか，誰にもはっきりとはわからない。
+485@AU@あなたが市長であろうとなかろうと，そんなことはちっとも問題ではないと申し上げずにはいられません。
+486@AU@彼女はとても耳が遠かったので，僕は何度も何度も同じことを言わなければならなかった。
+487@AU@駅の方へかなり行ってからやっと彼は傘を宿に置き忘れたことに気がついた。
+488@AU@ざあっと雨が滝のように降ってきた。すると彼らは歓声をあげて外へ飛び出した。
+489@AU@心貧しき者は幸いなるかな，天国は彼らのものなればなり。
+490@AU@彼女は着るものにうるさい人です。そして私の姉もそうです。
+491@AU@少し疲れていますが，必要なら喜んで行きましょう。
+492@AU@彼はまるで耳が聴こえないかのように我々の警告に何の注意も払わなかった。
+493@AU@失った富は倹約と勤勉によって取り戻せるかもしれないし，失った健康は節制と薬で取り戻せるかもしれないが，失った時間は永遠に戻らない。
+494@AU@医者が万一間に合わなかったらどうしよう。彼はきっと出血多量で死んでしまうだろう。
+495@AU@彼女は美人とは言えないまでも，とても魅力的な娘になりそうだ。
+496@AU@γ線は実際我々に多くの物の内部を調べたり，内部についてたくさんのことを知ったりする手段を与えてくれる。
+497@AU@本当の偉大さは，どちらかと言えば，地位や権力とはほとんど関係がない。
+498@AU@彼は同意したがあまり熱心ではなかった。その仕事は不可能ではないにしても，桁外れに困難であろうということを彼は確信していたのであった。
+499@AU@アメリカの有名な植物学者アサ・グレイは2万5,000以上の植物の名を記憶から思い出すことができた。
+500@AU@民主主義は，法のもとではすべての人間は平等であるという考えに基づいている。" hidden></div>
+        <!----------------------ここまでワードリスト-------------------------------->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="./mdapp.js"></script>
+</body>
+
+</html>

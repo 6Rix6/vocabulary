@@ -1,13 +1,15 @@
 const app = () => {
     const word = document.querySelector('.word');
-　  const wordList = document.querySelector('.wordlist');
+    const wordList = document.querySelector('.wordlist');
     const input = document.querySelector('.input');
     const str = wordList.getAttribute('data-word');
     const nametext = document.querySelector('.nameText');
     const ans = document.querySelector('.ans');
+    const speaker = document.querySelector('.material-symbols-outlined');
     const max = document.querySelector('.max');
     const min = document.querySelector('.min');
-    //const submit = document.querySelector('.submit');
+    const choices = document.querySelector('.choices');
+    const choices_area = document.querySelector('.choices_area');
     const skip = document.querySelector('.btn04');
     const b = document.querySelector('.b');
     const c = document.querySelector('.c');
@@ -17,10 +19,11 @@ const app = () => {
     const btn03 = document.querySelector('.btn03');
     const btn05 = document.querySelector('.btn05');
     const check = document.getElementById('popup');
+    const mode_swicher = document.querySelector('.mode');
     let bn = 1;
     let cn = 1900;
     let currentword;
-　  let maxnumber = 1899;
+    let maxnumber = 1899;
     let minnumber = 0;
     let currentnumbers = 0;
     let result = []; 
@@ -35,25 +38,25 @@ const app = () => {
 
 
     $(window).on('load',function(){
-$("#splash-logo").delay(100).fadeOut('slow');//ロゴを1.2秒でフェードアウトする記述
-
-//=====ここからローディングエリア（splashエリア）を1.5秒でフェードアウトした後に動かしたいJSをまとめる
-$("#splash").delay(100).fadeOut('slow',function(){//ローディングエリア（splashエリア）を1.5秒でフェードアウトする記述
-
-$('body').addClass('appear');//フェードアウト後bodyにappearクラス付与
-
-});
-//=====ここまでローディングエリア（splashエリア）を1.5秒でフェードアウトした後に動かしたいJSをまとめる
-
-//=====ここから背景が伸びた後に動かしたいJSをまとめたい場合は
-$('.splashbg').on('animationend', function() { 
-
-
-//この中に動かしたいJSを記載
-});
-//=====ここまで背景が伸びた後に動かしたいJSをまとめる
-
-});
+        $("#splash-logo").delay(100).fadeOut('slow');//ロゴを1.2秒でフェードアウトする記述
+        
+        //=====ここからローディングエリア（splashエリア）を1.5秒でフェードアウトした後に動かしたいJSをまとめる
+        $("#splash").delay(100).fadeOut('slow',function(){//ローディングエリア（splashエリア）を1.5秒でフェードアウトする記述
+        
+        $('body').addClass('appear');//フェードアウト後bodyにappearクラス付与
+        
+        });
+        //=====ここまでローディングエリア（splashエリア）を1.5秒でフェードアウトした後に動かしたいJSをまとめる
+        
+        //=====ここから背景が伸びた後に動かしたいJSをまとめたい場合は
+        $('.splashbg').on('animationend', function() { 
+        
+        
+        //この中に動かしたいJSを記載
+        });
+        //=====ここまで背景が伸びた後に動かしたいJSをまとめる
+        
+    });
 
     //-----------------------
 
@@ -68,7 +71,7 @@ $('.splashbg').on('animationend', function() {
      for(var i=0;i<tmp.length;++i){
         result[i] = tmp[i].split(',');
      }
-      keysAfter = [ '番号', '単語','意味'];
+      keysAfter = [ '番号','単語','意味'];
 
         result = result.map(e => 
             Object.fromEntries(                      
@@ -91,11 +94,9 @@ $('.splashbg').on('animationend', function() {
         ReTable.innerText = '';
         nameText.value = '';
         cerebrate.innerText = '';
-        ans.innerText = '';
+        ans.hidden = true;
         missedword.innerText = '';
         view();
-        console.log(maxnumber);
-        console.log(minnumber);
         random();
         check.checked = false;
     }
@@ -121,11 +122,96 @@ $('.splashbg').on('animationend', function() {
     });
 
     skip.addEventListener('click', () => {
-        ans.innerText = result[currentword]['単語'];
+        ans.hidden = false;
         wrong[currentword] = result[currentword];
     });
 
-    nameText.addEventListener('change', changeshadow);
+    speaker.addEventListener('click', () => {
+        setspeaker();
+    });
+
+    function setspeaker(){
+        console.log("speaker");
+        if ('speechSynthesis' in window) {
+        const uttr = new SpeechSynthesisUtterance();
+        uttr.text = result[currentword]['単語'];
+        uttr.lang = "en-US";
+        uttr.rate = 0.8;
+        uttr.pitch = 1;
+        uttr.volume = 1;
+        window.speechSynthesis.speak(uttr);
+    
+     }else{
+            alert('大変申し訳ありません。このブラウザは音声合成に対応していません。');
+     }
+    }
+
+
+    
+
+    const item0 = document.querySelector('.item0');
+    const item1 = document.querySelector('.item1');
+    const item2 = document.querySelector('.item2');
+    const item3 = document.querySelector('.item3');
+    var correctNum;//選択肢の正解の番号
+
+    
+    function makechoice(num){
+        var word_list = [];
+        for (var i = 0; i < 3; ++i){
+            let randomize = Math.floor( Math.random() * 1899);
+            word_list[i] = result[randomize]['意味'];
+        }
+        correctNum = Math.floor( Math.random() * 3);
+        word_list.splice(correctNum,0,result[num]['意味']); //listのランダム番目に正解を挿入
+        item0.innerHTML = word_list[0];
+        item1.innerHTML = word_list[1];
+        item2.innerHTML = word_list[2];
+        item3.innerHTML = word_list[3];  
+    }
+
+    item0.addEventListener('click', event => {
+        correctcheck(0,item0);
+    });
+
+    item1.addEventListener('click', event => {
+        correctcheck(1,item1);
+    });
+    
+    item2.addEventListener('click', event => {
+        correctcheck(2,item2);
+    });
+    
+    item3.addEventListener('click', event => {
+        correctcheck(3,item3);
+    });
+
+    function correctcheck(num,item){
+        if (correctNum == num){
+            console.log("correct");
+            random();
+        }else{
+            item.style.borderColor = '#ff9900';
+            item.style.boxShadow = 'inset 2px 1px 2px 0 #ff9900, 2px 1px 2px 0 #ff9900';
+            wrong[currentword] = result[currentword];
+        }
+    }
+
+    //選択肢のスタイルをリセット
+    function borderreset(item){
+        item.style.borderColor = '#333';
+        item.style.boxShadow = '';
+    }
+
+    function allreset(){
+         borderreset(item0);
+         borderreset(item1);
+         borderreset(item2);
+         borderreset(item3);
+    }
+
+
+    
 
     //ランダム処理
 
@@ -133,15 +219,16 @@ $('.splashbg').on('animationend', function() {
     　let ranmax = maxnumber - minnumber + 1;
       let randomize = Math.floor( Math.random() * ranmax) + minnumber;
     　if (list.includes(result[randomize]) == false && bn != cn){
-        msg.innerText = result[randomize]['意味'];
+        //msg.innerText = result[randomize]['単語'];
+         changemsg(randomize);
+        makechoice(randomize);
         currentword = randomize;
-        //sconsole.log(currentword);
         console.log(result[randomize]);
         currentnumbers += 1;
-        //console.log(currentnumbers);
         list[currentnumbers] =  result[randomize];
         view();
-        ans.innerText = '';
+        ans.hidden = true;
+        allreset();
       }else if(bn == cn){
          console.log("上限"); //ここでリセットしてくれ
          console.log(wrong); 
@@ -162,40 +249,6 @@ $('.splashbg').on('animationend', function() {
          console.log("重複");
       }
     }
-
-    //間違えた単語でもう一度
-
-    // const random_wrong = (wrong) =>{
-    //     if (list.includes(wrong[currentwrong]) == false && bn != cn){
-    //     msg.innerText = wrong[currentwrong]['意味'];
-    //     currentwrong += 1;
-    //     console.log(wrong[currentwrong]);
-    //     list[currentwrong] =  wrong[currentwrong];
-    //     view();
-    //     ans.innerText = '';
-    //   }else if(bn == cn){
-    //      console.log("上限"); //ここでリセットしてくれ
-    //      console.log(wrong); 
-    //      for(var i=0;i<wrong.length;++i){
-    //          console.log(wrong[i]);
-    //     }
-    //         if (wrong.length != 0){
-    //             missedword.innerText = "▼間違えた単語▼";
-    //             TableMaker.make({tableId: 'resultTable', json: wrong, headers: []}); //表作りました
-    //             check.checked = true;
-    //          }else{
-    //             cerebrate.innerText = "congraturations!!全問正解!";
-    //             console.log("congraturations!!");
-    //             check.checked = true;
-    //          }
-    //   }else{
-    //      random();
-    //      console.log("重複");
-    //   }
-        
-    // }
-
-    //ここまで
     
     //表の作成
     class TableMaker{
@@ -226,8 +279,9 @@ $('.splashbg').on('animationend', function() {
     window.addEventListener('DOMContentLoaded', () => {
         max.value = localStorage.getItem('max_strage');
         min.value = localStorage.getItem('min_strage');
+        choices_area.hidden = true;
+        nameText.hidden = false;
         getrange();
-        //console.log(result.length);
         view();
     });
 
@@ -245,6 +299,37 @@ $('.splashbg').on('animationend', function() {
     
     function changeshadow(){
         nameText.style.boxShadow = 'inset 1px 1px 2px 0 #333';
+    }
+
+    nameText.addEventListener('change', changeshadow);
+
+
+    let mode = 0;
+    //モード切替チェックボックス
+    mode_swicher.addEventListener('click', () => {
+        if(mode_swicher.checked == true){
+            console.log("checked");
+            choices_area.hidden = false;
+            nameText.hidden = true;
+            mode = 1;
+            getrange();
+        }else{
+            console.log("unchecked");
+            choices_area.hidden = true;
+            nameText.hidden = false;
+            mode = 0;
+            getrange();
+        }
+    });
+
+    function changemsg(randomize){
+        if(mode == 0){
+            msg.innerText = result[randomize]['意味'];
+            ans.innerText = result[randomize]['単語'];
+        }else{
+            msg.innerText = result[randomize]['単語'];
+            ans.innerText = result[randomize]['意味'];
+        }
     }
 
 
