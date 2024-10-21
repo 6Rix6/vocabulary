@@ -277,6 +277,10 @@ const app = () => {
 
     
     window.addEventListener('DOMContentLoaded', () => {
+        if(!localStorage.hasOwnProperty("key")){
+            localStorage.setItem('max_strage',1000);
+            localStorage.setItem('min_strage',1);
+        };
         max.value = localStorage.getItem('max_strage');
         min.value = localStorage.getItem('min_strage');
         choices_area.hidden = false;
